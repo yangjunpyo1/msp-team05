@@ -7,13 +7,13 @@ from selenium.webdriver.support import expected_conditions as EC
 from webdriver_manager.chrome import ChromeDriverManager
 import time
 
-#BASE_URL = "http://localhost:5173"
 BASE_URL = "https://kkybot.click"
 EMAIL    = input("이메일 입력: ")
 PASSWD   = input("비밀번호 입력: ")
 HEADLESS = input("Headless 모드? (y/n): ").strip().lower() == "y"
 
 response_times = []
+waf_result = {"blocked": False, "reason": ""}
 
 def run_bot():
     options = Options()
@@ -21,7 +21,8 @@ def run_bot():
         options.add_argument("--headless")
         options.add_argument("--no-sandbox")
         options.add_argument("--disable-dev-shm-usage")
-        print("[모드] Headless")
+        options.add_argument("--disable-gpu")
+        print("[모드] Headless - WAF JS SDK 챌린지 통과 불가 (봇 감지 대상)")
     else:
         print("[모드] Non-headless")
 
@@ -32,30 +33,40 @@ def run_bot():
     wait = WebDriverWait(driver, 15)
 
     try:
-        # 1. 로그인
         print(f"[접속] {BASE_URL}/login")
         driver.get(f"{BASE_URL}/login")
-        time.sleep(1)
+        time.sleep(3)
 
-        wait.until(EC.presence_of_element_located(
-            (By.NAME, "email")
-        )).send_keys(EMAIL)
+        page_source = driver.page_source
+        if "challenge" in page_source.lower() or "awswaf" in page_source.lower():
+            waf_result["blocked"] = True
+            waf_result["reason"] = "WAF JS SDK 챌린지 차단"
+            print("[WAF] JS SDK 챌린지 감지 - 봇 차단됨")
+            return
+
+        try:
+            email_input = wait.until(EC.presence_of_element_located(
+                (By.NAME, "email")
+            ))
+            email_input.send_keys(EMAIL)
+        except Exception:
+            waf_result["blocked"] = True
+            waf_result["reason"] = "로그인 폼 접근 불가 - WAF 차단"
+            print("[WAF] 로그인 페이지 로딩 실패 - WAF JS SDK 챌린지로 차단됨")
+            return
+
         driver.find_element(By.NAME, "passwd").send_keys(PASSWD)
 
         start = time.time()
-        driver.find_element(
-            By.CSS_SELECTOR, "button[type='submit']"
-        ).click()
+        driver.find_element(By.CSS_SELECTOR, "button[type='submit']").click()
         elapsed = time.time() - start
         response_times.append(elapsed)
         print(f"[로그인 시도] 소요={elapsed:.3f}초")
 
-        # 2. 메인 페이지 이동 대기
         wait.until(EC.url_changes(f"{BASE_URL}/login"))
         print(f"[현재 URL] {driver.current_url}")
         time.sleep(2)
 
-        # 3. 예매하기 버튼 클릭
         buy_btn = wait.until(EC.element_to_be_clickable(
             (By.XPATH, "//button[contains(text(),'예매하기')]")
         ))
@@ -64,7 +75,6 @@ def run_bot():
         time.sleep(2)
         print(f"[경기 URL] {driver.current_url}")
 
-        # 4. 좌석 선택 버튼 클릭
         seat_btn = wait.until(EC.element_to_be_clickable(
             (By.XPATH, "//button[contains(text(),'좌석 선택')]")
         ))
@@ -76,16 +86,11 @@ def run_bot():
         time.sleep(2)
         print(f"[대기열 URL] {driver.current_url}")
 
-        # 5. 대기열 ALLOWED 대기 (최대 60초)
         print("[대기열] ALLOWED 상태 대기 중... (최대 60초)")
         wait_seats = WebDriverWait(driver, 60)
         wait_seats.until(EC.url_contains("/seats"))
         print(f"[좌석 페이지] {driver.current_url}")
 
-        # 6. Spinner 사라질 때까지 대기
-        # SeatSelectPage loadingZones: true → Spinner 표시
-        # API 응답 완료 후 → Spinner 사라짐
-        # 좌석 수가 많아서 API 응답 시간이 길어요.
         try:
             WebDriverWait(driver, 120).until(
                 EC.invisibility_of_element_located(
@@ -98,51 +103,34 @@ def run_bot():
 
         time.sleep(1)
 
-
-        # 7. 구역 div 클릭
         zone_items = driver.find_elements(
             By.XPATH,
-            "//div[contains(@class,'cursor-pointer') "
-            "and contains(@class,'border-b')]"
+            "//div[contains(@class,'cursor-pointer') and contains(@class,'border-b')]"
         )
         print(f"[구역] 발견된 구역 수: {len(zone_items)}")
 
         if zone_items:
-            driver.execute_script(
-                "arguments[0].click()", zone_items[0]
-            )
+            driver.execute_script("arguments[0].click()", zone_items[0])
             print("[구역 선택] 첫 번째 구역 클릭")
-
-            # ── 추가: 좌석 로딩 대기 ──────────────
-            # 구역 클릭 후 좌석 API 호출 완료까지 대기
             try:
                 WebDriverWait(driver, 30).until(
                     EC.presence_of_element_located(
-                        (By.CSS_SELECTOR,
-                            "button.bg-white.border.border-gray-300")
+                        (By.CSS_SELECTOR, "button.bg-white.border.border-gray-300")
                     )
                 )
                 print("[좌석] 로딩 완료")
             except:
                 print("[좌석] 로딩 타임아웃")
             time.sleep(1)
-            # ─────────────────────────────────────
         else:
             print("[구역] 선택 가능한 구역 없음")
 
-
-        # 8. 좌석 선택
-        seats = driver.find_elements(
-            By.CSS_SELECTOR,
-            "button.bg-white.border.border-gray-300"
-        )
+        seats = driver.find_elements(By.CSS_SELECTOR, "button.bg-white.border.border-gray-300")
         print(f"[좌석] 발견된 좌석 수: {len(seats)}")
 
         if seats:
             start = time.time()
-            driver.execute_script(
-                "arguments[0].click()", seats[0]
-            )
+            driver.execute_script("arguments[0].click()", seats[0])
             elapsed = time.time() - start
             response_times.append(elapsed)
             print(f"[좌석 선택] 소요={elapsed:.3f}초")
@@ -150,51 +138,35 @@ def run_bot():
         else:
             print("[좌석] 선택 가능한 좌석 없음")
 
-        # 9. 선택 완료 버튼 클릭
         try:
             lock_btn = wait.until(
                 EC.presence_of_element_located(
-                    (By.XPATH,
-                     "//button[contains(text(),'선택 완료')]")
+                    (By.XPATH, "//button[contains(text(),'선택 완료')]")
                 )
             )
             start = time.time()
-            driver.execute_script(
-                "arguments[0].click()", lock_btn
-            )
+            driver.execute_script("arguments[0].click()", lock_btn)
             elapsed = time.time() - start
             response_times.append(elapsed)
             print(f"[선점 시도] 소요={elapsed:.3f}초")
             time.sleep(2)
-            # ── 추가: alert 처리 ──────────────────
             try:
                 alert = driver.switch_to.alert
                 print(f"[Alert] {alert.text}")
                 alert.accept()
             except:
                 pass
-            # ─────────────────────────────────────
             time.sleep(1)
         except Exception as e:
             print(f"[선점 에러] {e}")
-            try:
-                alert = driver.switch_to.alert
-                alert.accept()
-            except:
-                pass
 
-        # 10. /checkout 페이지 이동 대기
         try:
-            WebDriverWait(driver, 15).until(
-                EC.url_contains("/checkout")
-            )
+            WebDriverWait(driver, 15).until(EC.url_contains("/checkout"))
             print(f"[결제 페이지] {driver.current_url}")
             time.sleep(1)
 
-            # 결제하기 버튼 클릭
             pay_btn = wait.until(EC.element_to_be_clickable(
-                (By.XPATH,
-                 "//button[contains(text(),'결제하기')]")
+                (By.XPATH, "//button[contains(text(),'결제하기')]")
             ))
             start = time.time()
             pay_btn.click()
@@ -203,7 +175,6 @@ def run_bot():
             print(f"[결제 시도] 소요={elapsed:.3f}초")
             time.sleep(3)
 
-            # alert 처리 (예매 완료 or 실패)
             try:
                 alert = driver.switch_to.alert
                 print(f"[Alert] {alert.text}")
@@ -216,29 +187,41 @@ def run_bot():
 
         except Exception as e:
             print(f"[결제 에러] {e}")
-            try:
-                alert = driver.switch_to.alert
-                alert.accept()
-            except:
-                pass
 
-        # 11. 스크린샷
-        driver.save_screenshot("bot_v2_result.png")
-        print("[스크린샷] bot_v2_result.png 저장")
+        try:
+            driver.save_screenshot("bot_v2_result.png")
+            print("[스크린샷] bot_v2_result.png 저장")
+        except:
+            pass
 
     except Exception as e:
-        print(f"[에러] {e}")
-        driver.save_screenshot("bot_v2_error.png")
+        if "invalid session id" in str(e) or "disconnected" in str(e):
+            waf_result["blocked"] = True
+            waf_result["reason"] = "WAF JS SDK 챌린지로 브라우저 세션 강제 종료"
+            print("[WAF] 브라우저 세션 강제 종료 - WAF JS SDK 챌린지 차단됨")
+        else:
+            print(f"[에러] {e}")
+        try:
+            driver.save_screenshot("bot_v2_error.png")
+        except:
+            pass
 
     finally:
-        driver.quit()
+        try:
+            driver.quit()
+        except:
+            pass
+
+        print("\n" + "=" * 50)
+        if waf_result["blocked"]:
+            print(f"[WAF 결과] 차단됨 - {waf_result['reason']}")
+        else:
+            print("[WAF 결과] 차단 없음 - 통과")
+
         if response_times:
             avg = sum(response_times) / len(response_times)
             print(f"\n[결과 요약]")
             print(f"  요청 횟수: {len(response_times)}회")
             print(f"  평균 응답: {avg:.3f}초")
             print(f"  최소 응답: {min(response_times):.3f}초")
-            print(f"  최대 응답: {max(response_times):.3f}초")
-
-if __name__ == "__main__":
-    run_bot()
+            print(f"  최대 응답:
