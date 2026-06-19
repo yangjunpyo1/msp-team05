@@ -224,4 +224,7 @@ def run_bot():
             print(f"  요청 횟수: {len(response_times)}회")
             print(f"  평균 응답: {avg:.3f}초")
             print(f"  최소 응답: {min(response_times):.3f}초")
-            print(f"  최대 응답:
+            print(f"  최대 응답: {max(response_times):.3f}초")
+
+if __name__ == "__main__":
+    run_bot()
