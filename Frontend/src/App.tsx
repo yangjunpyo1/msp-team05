@@ -11,6 +11,7 @@ import ReservationPage from './pages/ReservationPage';
 import TicketPage from './pages/TicketPage';
 //import NotFoundPage from './pages/NotFoundPage';
 import AdminPage from './pages/AdminPage';
+import VerifyPage from './pages/VerifyPage';
 
 function AdminRoute({ children }: { children: React.ReactNode }) {
   const token = localStorage.getItem('accessToken');
@@ -33,6 +34,7 @@ function App() {
         <Route path="/signup" element={<SignupPage />} />
         <Route path="/games/:gameId" element={<GameDetailPage />} />
         <Route path="/games/:gameId/queue" element={<QueuePage />} />
+        <Route path="/games/:gameId/verify" element={<VerifyPage />} />
         <Route path="/games/:gameId/seats" element={<SeatSelectPage />} />
         <Route path="/checkout" element={<CheckoutPage />} />
         <Route path="/reservations" element={<ReservationPage />} />

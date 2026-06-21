@@ -1,0 +1,88 @@
+﻿<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <title>보안 확인</title>
+  <script type="text/javascript" src="https://4368d814931e.edge.captcha-sdk.awswaf.com/4368d814931e/jsapi.js" defer></script>
+  <style>
+    * { box-sizing: border-box; }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Malgun Gothic", sans-serif;
+      background: #f3f4f6;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      margin: 0;
+    }
+    .card {
+      background: #fff;
+      width: 420px;
+      padding: 40px 32px;
+      border-radius: 12px;
+      box-shadow: 0 4px 24px rgba(0,0,0,0.08);
+      text-align: center;
+    }
+    .card h1 {
+      font-size: 20px;
+      margin-bottom: 8px;
+      color: #111827;
+    }
+    .card p.desc {
+      font-size: 14px;
+      color: #6b7280;
+      margin-bottom: 24px;
+    }
+    #captcha-box {
+      min-height: 280px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border: 1px solid #e5e7eb;
+      border-radius: 8px;
+      background: #fafafa;
+    }
+    button {
+      margin-top: 20px;
+      padding: 10px 24px;
+      background: #2563eb;
+      color: #fff;
+      border: none;
+      border-radius: 6px;
+      font-size: 14px;
+      cursor: pointer;
+    }
+    button:hover { background: #1d4ed8; }
+    #result {
+      margin-top: 16px;
+      font-size: 14px;
+      font-weight: 600;
+    }
+  </style>
+</head>
+<body>
+<div class="card">
+  <h1> 보안 확인이 필요합니다</h1>
+  <p class="desc">비정상적인 접근이 감지되어 본인 확인을 진행합니다.</p>
+  <div id="captcha-box">
+    <button id="show-captcha-btn">사람인지 확인하기</button>
+  </div>
+  <p id="result"></p>
+</div>
+
+<script>
+    document.getElementById('show-captcha-btn').addEventListener('click', function() {
+      document.getElementById('show-captcha-btn').remove();
+      AwsWafCaptcha.renderCaptcha(document.getElementById('captcha-box'), {
+        apiKey: 'EmiTvaZ8WwCGxbGLHpwxfsYqBtONuYY4w/tBpnC14Ow2Ub8qcMI4KMoHz7zrD6imuLRruR2BgBzLRIJk0CVq746eUTVYYTdvzG/i2S4N6IQlmKg3ujhX+sub6DOOhp7w7iEcNvEOdlcyD1G3XmrJ0QFTqykMfwH/jeNpFog6hrW241HfC/vrWG2vu3qxUcv7FsbxdVFD7RCehif5He+IN5rx2MHuOsc0TFj4C/WNkwbxH9vcbTUfPW8MnlKRvbbo7b5tSwUOFxv3JVihlXQjecZOkq04mNUeR5+Vu46bgB6azS4TqZYQ0587zGHCHMXk/1d1B70ReuHM+w2F58MHsvJ5+7+pBVHPSP1oxFHpkRJ8C9S4bYwuGhwjsm/x9BCIqBz7PcbaT3qNizs9sQ/t+czf4u08nhbNc+0OqzFVxA3zeeTvgoUPGX6IEfECTIzzUYjLWv/OsLZ7wtNlVVZXZJ/8AEqeokXWgfxL/8Ts+0bN9VmQKfyBvZrCMV1E+pz3+nZeYbkTbjPuB5e0UlPuVL0O7o7Yx0G0t7XqFygKlAjHMuRu+J7xRKo/fL6UYnDPJoKtj5Tceq2ggV73SvJXj0Z5fiVXwmnlCwSrH2v3aWi3Ba4xyiGcR1CuhssjwjP+wCrARJFdACBj2uLKiL5esn541FeDwmYyHHjrKwTNe7k=_1_1',
+        onSuccess: function() {
+          document.getElementById('result').innerText = '✅ 확인 완료! 정상적으로 통과되었습니다.';
+        },
+        onError: function(err) {
+          document.getElementById('result').innerText = '❌ 확인 실패: ' + JSON.stringify(err);
+        }
+      });
+    });
+  </script>
+</body>
+</html>

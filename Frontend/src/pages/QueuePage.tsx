@@ -65,7 +65,7 @@ export default function QueuePage() {
 
           if (data.status === 'ALLOWED') {
             clearInterval(interval);
-            navigate(`/games/${gameId}/seats`);
+            navigate(`/games/${gameId}/verify`);
           }
 
           if (data.status === 'EXPIRED') {

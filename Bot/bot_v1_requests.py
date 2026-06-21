@@ -1,9 +1,9 @@
 """
-1단계 봇 - Python requests HTTP 봇
+1단계 봇 - Python HTTP 봇 (httpx, HTTP/2)
 WAF 탐지가 가장 쉬운 유형. 브라우저 없이 API를 직접 호출.
 User-Agent, 헤더 조작이 쉬워 WAF Bot Control의 Before 기준점으로 활용.
 """
-import requests
+import httpx
 import argparse
 import time
 import csv
@@ -11,8 +11,14 @@ import os
 from datetime import datetime
 
 BASE_URL = "https://kkybot.click"
-#BASE_URL = "http://localhost:8080"
 LOG_FILE = "bot_v1_results.csv"
+
+
+class WAFBlockedException(Exception):
+    def __init__(self, status_code, reason):
+        self.status_code = status_code
+        self.reason = reason
+        super().__init__(f"WAF blocked with status {status_code}: {reason}")
 
 
 class HTTPTicketingBot:
@@ -20,7 +26,17 @@ class HTTPTicketingBot:
         self.email = email
         self.password = password
         self.verbose = verbose
-        self.session = requests.Session()
+        self.client = httpx.Client(
+            http2=True,
+            headers={
+                "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/147.0.0.0 Safari/537.36",
+                "Accept": "application/json, text/plain, */*",
+                "Content-Type": "application/json",
+                "Origin": BASE_URL,
+                "Referer": f"{BASE_URL}/login",
+            },
+            timeout=30.0,
+        )
         self.results = []
 
     def _log(self, msg: str):
@@ -48,13 +64,24 @@ class HTTPTicketingBot:
             writer.writerows(self.results)
         self._log(f"결과 저장 완료: {LOG_FILE} ({len(self.results)}건)")
 
+    def _check_waf_block(self, res):
+        content_type = res.headers.get("content-type", "")
+        if res.status_code == 202:
+            raise WAFBlockedException(202, "CAPTCHA 챌린지")
+        if res.status_code in (403, 405, 429):
+            raise WAFBlockedException(res.status_code, "Block")
+        if "text/html" in content_type and "/api/" in str(res.request.url):
+            raise WAFBlockedException(res.status_code, "비정상 라우팅 (HTML 응답)")
+
     def _request(self, method: str, path: str, **kwargs):
         url = f"{BASE_URL}{path}"
         try:
-            res = self.session.request(method, url, **kwargs)
+            res = self.client.request(method, url, **kwargs)
+            print(f"[디버그] HTTP 버전: {res.http_version}")
             self._record(path, res.status_code)
+            self._check_waf_block(res)
             return res
-        except requests.exceptions.RequestException as e:
+        except httpx.RequestError as e:
             self._record(path, 0, str(e))
             raise
 
@@ -65,7 +92,7 @@ class HTTPTicketingBot:
         })
         res.raise_for_status()
         token = res.json()["data"]["accessToken"]
-        self.session.headers.update({"Authorization": f"Bearer {token}"})
+        self.client.headers.update({"Authorization": f"Bearer {token}"})
         self._log(f"로그인 성공: {self.email}")
         return token
 
@@ -86,7 +113,6 @@ class HTTPTicketingBot:
         return all_seats
 
     def hold_seats(self, game_id: str, seat_ids: list) -> str:
-        """좌석 선점 후 lockToken 반환"""
         res = self._request("POST", f"/api/games/{game_id}/seats/lock", json={"seatIds": seat_ids})
         res.raise_for_status()
         return res.json()["data"]["lockToken"]
@@ -130,6 +156,7 @@ class HTTPTicketingBot:
         self._log(f"반복 실행 시작: {repeat}회, 간격 {interval}초")
         success = 0
         blocked = 0
+        captcha = 0
 
         for i in range(repeat):
             self._log(f"--- 시도 {i + 1}/{repeat} ---")
@@ -137,7 +164,14 @@ class HTTPTicketingBot:
                 result = self.run_once(num_seats)
                 if result:
                     success += 1
-            except requests.exceptions.HTTPError as e:
+            except WAFBlockedException as e:
+                if e.status_code == 202:
+                    captcha += 1
+                    self._log(f"[WAF] CAPTCHA 차단! 상태코드={e.status_code}")
+                else:
+                    blocked += 1
+                    self._log(f"[WAF] 차단! 상태코드={e.status_code} ({e.reason})")
+            except httpx.HTTPStatusError as e:
                 status = e.response.status_code if e.response else 0
                 if status in (403, 405, 429):
                     blocked += 1
@@ -148,8 +182,13 @@ class HTTPTicketingBot:
             if i < repeat - 1:
                 time.sleep(interval)
 
-        self._log(f"완료 — 성공: {success}, 차단: {blocked}, 전체: {repeat}")
+        self._log(f"완료 — 성공: {success}, CAPTCHA: {captcha}, Block: {blocked}, 전체: {repeat}")
+        if captcha > 0 or blocked > 0:
+            self._log(f"[WAF 결과] 차단됨 (CAPTCHA={captcha}, Block={blocked})")
+        else:
+            self._log("[WAF 결과] 차단 없음 - 전부 통과")
         self._save_results()
+        self.client.close()
 
 
 if __name__ == "__main__":

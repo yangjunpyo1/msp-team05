@@ -12,13 +12,18 @@ import os
 from datetime import datetime
 
 from playwright.async_api import async_playwright
-#from playwright_stealth import stealth_async
-from playwright_stealth import Stealth
+from playwright_stealth import stealth_async
 
 BASE_URL     = "https://kkybot.click"
-#BASE_URL = "http://localhost:8080"
 FRONTEND_URL = "http://localhost:5173"
 LOG_FILE     = "bot_v3_results.csv"
+
+
+class WAFBlockedException(Exception):
+    def __init__(self, status_code, reason):
+        self.status_code = status_code
+        self.reason = reason
+        super().__init__(f"WAF blocked: {status_code} - {reason}")
 
 
 class PlaywrightTicketingBot:
@@ -69,22 +74,18 @@ class PlaywrightTicketingBot:
         self._log(f"프록시 선택: {proxy} (index={index})")
         return proxy
 
-    async def _api_request(self, context, method: str, path: str, token: str, json_data: dict = None, proxy: str = "") -> dict:
-        """브라우저 컨텍스트로 API 직접 호출"""
-        url = f"{BASE_URL}{path}"
-        headers = {
-            "Authorization": f"Bearer {token}",
-            "Content-Type": "application/json",
-        }
-        response = await context.request.fetch(
-            url,
-            method=method,
-            headers=headers,
-            data=json_data,
-        )
+    def _check_waf_block(self, response, step_name: str):
         status = response.status
-        self._record(path, status, proxy=proxy)
-        return await response.json()
+        content_type = response.headers.get("content-type", "")
+        if status == 202:
+            self._log(f"[WAF] CAPTCHA 차단! {step_name} 단계에서 차단됨 (202)")
+            raise WAFBlockedException(202, f"{step_name} 단계 CAPTCHA")
+        if status in (403, 405, 429):
+            self._log(f"[WAF] Block 차단! {step_name} 단계, 상태코드={status}")
+            raise WAFBlockedException(status, f"{step_name} 단계 Block")
+        if "application/json" not in content_type:
+            self._log(f"[경고] 비정상 응답 ({step_name}, content-type={content_type})")
+            raise WAFBlockedException(status, f"{step_name} 단계 비정상 라우팅")
 
     async def run_once(self, index: int = 0, num_seats: int = 1):
         proxy = self._get_proxy(index)
@@ -100,8 +101,7 @@ class PlaywrightTicketingBot:
                 timezone_id="Asia/Seoul",
             )
             page = await context.new_page()
-            #await stealth_async(page)
-            await Stealth().apply_stealth_async(page)
+            await stealth_async(page)
             self._log("Stealth 모드 적용 완료")
 
             try:
@@ -113,6 +113,7 @@ class PlaywrightTicketingBot:
                     data={"email": self.email, "passwd": self.password},
                 )
                 self._record("/api/auth/login", login_res.status, proxy=proxy or "")
+                self._check_waf_block(login_res, "로그인")
                 login_data = await login_res.json()
                 token = login_data["data"]["accessToken"]
                 self._log(f"로그인 성공: {self.email}")
@@ -124,6 +125,7 @@ class PlaywrightTicketingBot:
                     headers={"Authorization": f"Bearer {token}"},
                 )
                 self._record("/api/games", games_res.status, proxy=proxy or "")
+                self._check_waf_block(games_res, "경기조회")
                 games_data = await games_res.json()
                 games = games_data["data"]["content"]
                 on_sale = [g for g in games if g.get("status") == "ON_SALE"]
@@ -141,6 +143,7 @@ class PlaywrightTicketingBot:
                     headers={"Authorization": f"Bearer {token}"},
                 )
                 self._record(f"/api/games/{game_id}/seats", seats_res.status, proxy=proxy or "")
+                self._check_waf_block(seats_res, "좌석조회")
                 seats_data = await seats_res.json()
                 zones = seats_data["data"]["zones"]
                 all_seats = []
@@ -167,6 +170,7 @@ class PlaywrightTicketingBot:
                     data={"seatIds": target_ids},
                 )
                 self._record(f"/api/games/{game_id}/seats/lock", lock_res.status, proxy=proxy or "")
+                self._check_waf_block(lock_res, "좌석선점")
                 lock_data = await lock_res.json()
                 lock_token = lock_data["data"]["lockToken"]
                 self._log(f"좌석 점유 완료 (lockToken={lock_token})")
@@ -182,9 +186,12 @@ class PlaywrightTicketingBot:
                     data={"gameId": game_id, "lockToken": lock_token},
                 )
                 self._record("/api/reservations", reserve_res.status, proxy=proxy or "")
+                self._check_waf_block(reserve_res, "예매확정")
                 reserve_data = await reserve_res.json()
                 self._log(f"예매 성공: reservationId={reserve_data['data'].get('reservationId')}")
 
+            except WAFBlockedException:
+                raise
             except Exception as e:
                 self._log(f"오류 발생: {e}")
                 raise
@@ -194,21 +201,33 @@ class PlaywrightTicketingBot:
     async def run(self, num_seats: int = 1, repeat: int = 1, interval: float = 1.0):
         self._log(f"반복 실행 시작: {repeat}회, 간격 {interval}초, 프록시 {len(self.proxies)}개")
         success = 0
+        captcha = 0
         blocked = 0
+        error = 0
 
         for i in range(repeat):
             self._log(f"--- 시도 {i + 1}/{repeat} ---")
             try:
                 await self.run_once(index=i, num_seats=num_seats)
                 success += 1
+            except WAFBlockedException as e:
+                if e.status_code == 202:
+                    captcha += 1
+                else:
+                    blocked += 1
+                self._log(f"[WAF 차단] {e.reason}")
             except Exception as e:
-                blocked += 1
-                self._log(f"차단 또는 오류: {e}")
+                error += 1
+                self._log(f"오류: {e}")
 
             if i < repeat - 1:
                 await asyncio.sleep(interval)
 
-        self._log(f"완료 — 성공: {success}, 차단/오류: {blocked}, 전체: {repeat}")
+        self._log(f"완료 — 성공: {success}, CAPTCHA: {captcha}, Block: {blocked}, 오류: {error}, 전체: {repeat}")
+        if captcha > 0 or blocked > 0:
+            self._log(f"[WAF 결과] 차단됨 (CAPTCHA={captcha}, Block={blocked})")
+        else:
+            self._log("[WAF 결과] 차단 없음 - 전부 통과")
         self._save_results()
 
 

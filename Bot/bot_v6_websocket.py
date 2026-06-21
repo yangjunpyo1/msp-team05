@@ -1,12 +1,11 @@
 import websocket
-import requests
+import httpx
 import json
 import time
 import threading
 import random
 import string
 
-#BASE_URL = "http://localhost:8080"
 BASE_URL = "https://kkybot.click"
 EMAIL    = input("이메일 입력: ")
 PASSWD   = input("비밀번호 입력: ")
@@ -15,12 +14,35 @@ token      = None
 game_id    = None
 lock_times = []
 
+session = httpx.Client(http2=True, timeout=20.0)
+
+
+def check_waf_block(res, step_name: str) -> bool:
+    status = res.status_code
+    content_type = res.headers.get("content-type", "")
+
+    if status == 202:
+        print(f"[WAF] 챌린지/CAPTCHA 차단! {step_name} 단계 (202)")
+        return True
+    if status in (403, 405, 429):
+        print(f"[WAF] Block 차단! {step_name} 단계, 상태코드={status}")
+        return True
+    if "application/json" not in content_type:
+        print(f"[WAF] 비정상 라우팅 감지! {step_name} 단계 (content-type={content_type})")
+        return True
+    return False
+
+
 def login():
     global token
-    res = requests.post(
+    res = session.post(
         f"{BASE_URL}/api/auth/login",
         json={"email": EMAIL, "passwd": PASSWD}
     )
+    if check_waf_block(res, "로그인"):
+        print("\n[WAF 결과] 차단됨 - WebSocket 연결 시도조차 못함")
+        exit(0)
+
     if res.status_code == 200:
         token = res.json()["data"]["accessToken"]
         print(f"[로그인 성공] 토큰: {token[:30]}...")
@@ -28,12 +50,17 @@ def login():
         print(f"[로그인 실패] {res.status_code}: {res.text}")
         exit(1)
 
+
 def get_game_id():
     global game_id
-    res = requests.get(
+    res = session.get(
         f"{BASE_URL}/api/games",
         headers={"Authorization": f"Bearer {token}"}
     )
+    if check_waf_block(res, "경기조회"):
+        print("\n[WAF 결과] 차단됨")
+        exit(0)
+
     if res.status_code == 200:
         games = res.json()["data"]["content"]
 
@@ -60,14 +87,6 @@ def get_game_id():
         print(f"[경기 조회 실패] {res.status_code}: {res.text}")
         exit(1)
 
-#def get_sockjs_url():
-#    server_id  = str(random.randint(0, 999)).zfill(3)
-#    session_id = "".join(
-#        random.choices(string.ascii_lowercase + string.digits, k=8)
-#    )
-#    url = f"ws://localhost:8080/ws/seats/{server_id}/{session_id}/websocket"
-#    print(f"[SockJS URL] {url}")
-#    return url
 
 def get_sockjs_url():
     server_id  = str(random.randint(0, 999)).zfill(3)
@@ -78,18 +97,23 @@ def get_sockjs_url():
     print(f"[SockJS URL] {url}")
     return url
 
+
 def lock_seat(seat_id):
     start = time.time()
-    res = requests.post(
+    res = session.post(
         f"{BASE_URL}/api/games/{game_id}/seats/lock",
         json={"seatIds": [seat_id]},
         headers={"Authorization": f"Bearer {token}"}
     )
     elapsed = time.time() - start
     lock_times.append(elapsed)
+    if check_waf_block(res, "좌석선점"):
+        print(f"[선점 시도] seatId={seat_id} → WAF 차단됨 (응답={res.status_code})")
+        return
     print(f"[선점 시도] seatId={seat_id} "
           f"응답={res.status_code} "
           f"소요={elapsed:.3f}초")
+
 
 def handle_stomp(ws, message):
     if message.startswith("CONNECTED"):
@@ -117,8 +141,10 @@ def handle_stomp(ws, message):
         except Exception as e:
             print(f"[파싱 오류] {e}")
 
+
 def on_open(ws):
     print("[WebSocket] 연결 성공")
+
 
 def on_message(ws, message):
     if not message or message == "\n":
@@ -147,11 +173,16 @@ def on_message(ws, message):
     elif msg_type == "c":
         print("[SockJS] 서버에서 닫음")
 
+
 def on_error(ws, error):
     print(f"[에러] {error}")
+    print("[WAF] WebSocket 핸드셰이크 단계에서 차단되었을 가능성 있음")
+
 
 def on_close(ws, code, msg):
     print(f"[WebSocket 종료] code={code}")
+    if code != 1000:
+        print(f"[WAF] WebSocket 연결이 비정상 종료됨 (code={code}) - WAF 차단 가능성")
     if lock_times:
         avg = sum(lock_times) / len(lock_times)
         print(f"\n[결과 요약]")
@@ -159,6 +190,7 @@ def on_close(ws, code, msg):
         print(f"  평균 응답: {avg:.3f}초")
         print(f"  최소 응답: {min(lock_times):.3f}초")
         print(f"  최대 응답: {max(lock_times):.3f}초")
+
 
 if __name__ == "__main__":
     login()
