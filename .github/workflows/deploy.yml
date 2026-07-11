@@ -6,7 +6,7 @@ on:
   workflow_dispatch:
 
 env:
-  AWS_REGION: eu-west-2
+  AWS_REGION: ap-northeast-2
   ECR_REPOSITORY: kky-prod-backend
 
 jobs:
@@ -68,7 +68,7 @@ jobs:
       - name: Build Frontend
         working-directory: ./Frontend
         env:
-          VITE_API_URL: https://kkybot.click
+          VITE_API_URL: https://api.kkybot.net
         run: |
           npm install
           npm run build
@@ -79,7 +79,7 @@ jobs:
 
       - name: Invalidate CloudFront
         run: |
-          CF_ID=$(aws cloudfront list-distributions --query "DistributionList.Items[?Aliases.Items[0]=='kkybot.click'].Id" --output text)
+          CF_ID=$(aws cloudfront list-distributions --query "DistributionList.Items[?Aliases.Items[0]=='kkybot.net'].Id" --output text)
           aws cloudfront create-invalidation --distribution-id $CF_ID --paths "/*"
 
       - name: Deploy to EC2 via SSM
@@ -100,7 +100,7 @@ jobs:
               --instance-ids $INSTANCE_ID \
               --document-name "AWS-RunShellScript" \
               --parameters commands='[
-                "aws ecr get-login-password --region eu-west-2 | docker login --username AWS --password-stdin '"$ECR_REGISTRY"'",
+                "aws ecr get-login-password --region '"$AWS_REGION"' | docker login --username AWS --password-stdin '"$ECR_REGISTRY"'",
                 "docker pull '"$ECR_REGISTRY/$ECR_REPOSITORY:latest"'",
                 "docker stop kky-backend || true",
                 "docker rm kky-backend || true",
