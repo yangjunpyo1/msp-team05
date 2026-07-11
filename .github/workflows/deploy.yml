@@ -79,7 +79,7 @@ jobs:
 
       - name: Invalidate CloudFront
         run: |
-          CF_ID=$(aws cloudfront list-distributions --query "DistributionList.Items[?Aliases.Items[0]=='kkybot.net'].Id" --output text)
+          CF_ID=$(aws cloudfront list-distributions --query "DistributionList.Items[?contains(Aliases.Items, 'kkybot.net')].Id" --output text)
           aws cloudfront create-invalidation --distribution-id $CF_ID --paths "/*"
 
       - name: Deploy to EC2 via SSM
