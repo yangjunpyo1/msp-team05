@@ -68,7 +68,7 @@ jobs:
       - name: Build Frontend
         working-directory: ./Frontend
         env:
-          VITE_API_URL: https://api.kkybot.net
+          VITE_API_URL: https://kkybot.net
         run: |
           npm install
           npm run build
