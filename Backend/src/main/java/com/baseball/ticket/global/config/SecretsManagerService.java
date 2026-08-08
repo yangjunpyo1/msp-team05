@@ -2,14 +2,11 @@ package com.baseball.ticket.global.config;
 
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import software.amazon.awssdk.regions.Region;
 import software.amazon.awssdk.services.secretsmanager.SecretsManagerClient;
 import software.amazon.awssdk.services.secretsmanager.model.GetSecretValueRequest;
 import software.amazon.awssdk.services.secretsmanager.model.GetSecretValueResponse;
 
 public class SecretsManagerService {
-
-    private static final Region REGION = Region.EU_WEST_2;
 
     private static final String DB_SECRET_NAME    = "kky-prod-db-secret";
     private static final String REDIS_SECRET_NAME = "kky-prod-redis-secret";
@@ -19,8 +16,8 @@ public class SecretsManagerService {
     private final ObjectMapper objectMapper;
 
     public SecretsManagerService() {
+        // 리전을 하드코딩하지 않고 EC2 인스턴스 메타데이터/환경 기준으로 SDK 기본 리전 프로바이더 체인이 자동 감지
         this.client = SecretsManagerClient.builder()
-                .region(REGION)
                 .build();
         this.objectMapper = new ObjectMapper();
     }
