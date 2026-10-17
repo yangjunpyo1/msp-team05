@@ -11,7 +11,7 @@ import random
 import sys
 from headers import get_random_profile
 
-BASE_URL    = "https://kkybot.click"
+BASE_URL    = "https://kkybot.net"
 TARGET_TEAM = None
 
 def random_ip():

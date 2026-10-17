@@ -14,7 +14,7 @@ from datetime import datetime
 from playwright.async_api import async_playwright
 from playwright_stealth import stealth_async
 
-BASE_URL     = "https://kkybot.click"
+BASE_URL     = "https://kkybot.net"
 FRONTEND_URL = "http://localhost:5173"
 LOG_FILE     = "bot_v3_results.csv"
 

@@ -8,7 +8,7 @@ from webdriver_manager.chrome import ChromeDriverManager
 import time
 import json
 
-BASE_URL = "https://kkybot.click"
+BASE_URL = "https://kkybot.net"
 EMAIL    = input("이메일 입력: ")
 PASSWD   = input("비밀번호 입력: ")
 HEADLESS = input("Headless 모드? (y/n): ").strip().lower() == "y"

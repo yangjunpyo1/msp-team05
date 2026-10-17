@@ -10,7 +10,7 @@ import random
 import sys
 from headers import get_random_profile
 
-BASE_URL = "https://kkybot.click"
+BASE_URL = "https://kkybot.net"
 EMAIL    = input("이메일 입력: ")
 PASSWD   = input("비밀번호 입력: ")
 

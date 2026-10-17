@@ -6,7 +6,7 @@ import threading
 import random
 import string
 
-BASE_URL = "https://kkybot.click"
+BASE_URL = "https://kkybot.net"
 EMAIL    = input("이메일 입력: ")
 PASSWD   = input("비밀번호 입력: ")
 
@@ -93,7 +93,7 @@ def get_sockjs_url():
     session_id = "".join(
         random.choices(string.ascii_lowercase + string.digits, k=8)
     )
-    url = f"wss://kkybot.click/ws/seats/{server_id}/{session_id}/websocket"
+    url = f"wss://kkybot.net/ws/seats/{server_id}/{session_id}/websocket"
     print(f"[SockJS URL] {url}")
     return url
 
