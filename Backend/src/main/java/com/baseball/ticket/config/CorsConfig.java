@@ -19,7 +19,9 @@ public class CorsConfig {
                 "http://localhost:5173",
                 "http://localhost:3000",
                 "https://kkybot.click",
-                "https://www.kkybot.click"
+                "https://www.kkybot.click",
+                "https://kkybot.net",
+                "https://www.kkybot.net"
         ));
 
         config.setAllowedMethods(

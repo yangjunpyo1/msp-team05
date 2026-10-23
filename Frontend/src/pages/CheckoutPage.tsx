@@ -46,7 +46,12 @@ export default function CheckoutPage() {
       localStorage.removeItem('gameId');
       alert('예매가 완료되었습니다!');
       navigate('/reservations');
-    } catch (err) {
+    } catch (err: any) {
+      if (err?.response?.data?.message === 'QUEUE_NOT_PASSED') {
+        alert('대기열을 먼저 통과해 주세요.');
+        navigate(gameId ? `/games/${gameId}` : '/');
+        return;
+      }
       alert('결제에 실패했습니다. 다시 시도해주세요.');
     } finally {
       setLoading(false);

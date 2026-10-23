@@ -4,6 +4,7 @@ import com.baseball.ticket.domain.auth.entity.User;
 import com.baseball.ticket.domain.auth.repository.UserRepository;
 import com.baseball.ticket.domain.game.entity.Game;
 import com.baseball.ticket.domain.game.repository.GameRepository;
+import com.baseball.ticket.domain.queue.service.QueuePassService;
 import com.baseball.ticket.domain.seat.dto.SeatLockRequest;
 import com.baseball.ticket.domain.seat.dto.SeatLockResponse;
 import com.baseball.ticket.domain.seat.dto.SeatMapResponse;
@@ -40,6 +41,7 @@ public class SeatService {
     private final UserRepository userRepository;
     private final SimpMessagingTemplate messagingTemplate;
     private final RedisTemplate<String, String> redisTemplate;
+    private final QueuePassService queuePassService;
 
     private static final int LOCK_TTL_MINUTES = 5;
 
@@ -147,6 +149,9 @@ public class SeatService {
         User user = userRepository.findByEmail(userEmail)
                 .orElseThrow(() -> new BusinessException("NOT_FOUND", 404));
 
+        // 대기열 통과 검사
+        queuePassService.require(gameId, user.getId());
+
         List<Seat> seats = seatRepository.findAllByIds(request.getSeatIds());
 
         if (seats.size() != request.getSeatIds().size()) {
@@ -183,6 +188,9 @@ public class SeatService {
                 user.getId() + "|" + gameId + "|" + seatIdsValue,
                 LOCK_TTL_MINUTES, TimeUnit.MINUTES
         );
+
+        // 결제 중 통과 기록이 만료되지 않도록 연장
+        queuePassService.extendForPayment(gameId, user.getId());
 
         // DB에도 선점 기록 저장
         LocalDateTime expiresAt = LocalDateTime.now().plusMinutes(LOCK_TTL_MINUTES);

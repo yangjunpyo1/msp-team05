@@ -4,6 +4,7 @@ import com.baseball.ticket.domain.auth.entity.User;
 import com.baseball.ticket.domain.auth.repository.UserRepository;
 import com.baseball.ticket.domain.payment.entity.Payment;
 import com.baseball.ticket.domain.payment.repository.PaymentRepository;
+import com.baseball.ticket.domain.queue.service.QueuePassService;
 import com.baseball.ticket.domain.seat.entity.SeatLock;
 import com.baseball.ticket.domain.seat.repository.SeatLockRepository;
 import com.baseball.ticket.domain.seat.repository.SeatZoneRepository;
@@ -30,6 +31,7 @@ public class PaymentController {
     private final SeatLockRepository seatLockRepository;
     private final SeatRepository seatRepository;
     private final SeatZoneRepository seatZoneRepository;
+    private final QueuePassService queuePassService;
 
     @Transactional
     @PostMapping("/prepare")
@@ -51,6 +53,9 @@ public class PaymentController {
         if (seatLocks.isEmpty()) {
             throw new BusinessException("LOCK_NOT_FOUND", 404);
         }
+
+        // 대기열 통과 검사 (confirm은 prepare가 만든 orderId로만 진행되므로 여기서 차단)
+        queuePassService.require(seatLocks.get(0).getGame().getId(), user.getId());
 
         // 각 좌석의 구역 가격 합산
         int amount = 0;

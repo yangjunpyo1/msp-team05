@@ -4,6 +4,7 @@ import com.baseball.ticket.domain.auth.entity.User;
 import com.baseball.ticket.domain.auth.repository.UserRepository;
 import com.baseball.ticket.domain.game.entity.Game;
 import com.baseball.ticket.domain.game.repository.GameRepository;
+import com.baseball.ticket.domain.queue.service.QueuePassService;
 import com.baseball.ticket.domain.reservation.dto.ReservationRequest;
 import com.baseball.ticket.domain.reservation.dto.ReservationResponse;
 import com.baseball.ticket.domain.reservation.entity.Reservation;
@@ -33,6 +34,7 @@ public class ReservationService {
     private final SeatRepository seatRepository;
     private final SimpMessagingTemplate messagingTemplate;
     private final RedisTemplate<String, String> redisTemplate;
+    private final QueuePassService queuePassService;
 
 
     @Transactional
@@ -47,6 +49,9 @@ public class ReservationService {
 
         Game game = gameRepository.findById(req.getGameId())
                 .orElseThrow(() -> new BusinessException("GAME_NOT_FOUND", 404));
+
+        // 대기열 통과 검사
+        queuePassService.require(req.getGameId(), user.getId());
 
         Reservation lastReservation = null;
         Seat lastSeat = null;
@@ -73,6 +78,9 @@ public class ReservationService {
             lastReservation = reservationRepository.save(reservation);
             lastSeat = seat;
         }
+
+        // 한 번 통과 = 한 번 예매
+        queuePassService.consume(req.getGameId(), user.getId());
 
         return ReservationResponse.from(lastReservation, game, lastSeat);
     }

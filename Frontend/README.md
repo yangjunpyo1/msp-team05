@@ -1,5 +1,19 @@
 # React + TypeScript + Vite
 
+## 배포 환경변수 (KKYBot)
+
+빌드 전에 `.env.example`을 `.env.production`으로 복사해 값을 채운다. `.env*` 파일은 커밋하지 않는다.
+
+| 변수 | 용도 |
+|---|---|
+| `VITE_API_URL` | 백엔드 API 주소 (예: `https://kkybot.net`) |
+| `VITE_WAF_CAPTCHA_SDK_URL` | AWS WAF CAPTCHA SDK(`jsapi.js`) 주소 — `index.html`에서 로드 |
+| `VITE_WAF_CHALLENGE_SDK_URL` | AWS WAF Challenge SDK(`challenge.js`) 주소 — `index.html`에서 로드 |
+| `VITE_WAF_CAPTCHA_API_KEY` | CAPTCHA 위젯 API 키 (서비스 도메인용으로 발급) |
+
+SDK 주소와 API 키는 Web ACL을 다시 만들면 바뀌므로, 인프라 재생성 후 `.env.example`의 CLI 명령으로 다시 조회한다.
+WAF가 CAPTCHA(405)나 Challenge(202)를 응답하면 `src/api/axios.ts` 인터셉터가 공통으로 처리한다(`src/api/wafCaptcha.ts`).
+
 This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
 
 Currently, two official plugins are available:

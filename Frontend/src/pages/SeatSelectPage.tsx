@@ -33,7 +33,6 @@ const FALLBACK_COLORS = ['#7c3aed', '#0891b2', '#be185d', '#b45309'];
 
 const CX = 210, CY = 210;
 
-const WAF_CAPTCHA_API_KEY = "EmiTvaZ8WwCGxbGLHpwxfsYqBtONuYY4w/tBpnC14Ow2Ub8qcMI4KMoHz7zrD6imuLRruR2BgBzLRIJk0CVq746eUTVYYTdvzG/i2S4N6IQlmKg3ujhX+sub6DOOhp7w7iEcNvEOdlcyD1G3XmrJ0QFTqykMfwH/jeNpFog6hrW241HfC/vrWG2vu3qxUcv7FsbxdVFD7RCehif5He+IN5rx2MHuOsc0TFj4C/WNkwbxH9vcbTUfPW8MnlKRvbbo7b5tSwUOFxv3JVihlXQjecZOkq04mNUeR5+Vu46bgB6azS4TqZYQ0587zGHCHMXk/1d1B70ReuHM+w2F58MHsvJ5+7+pBVHPSP1oxFHpkRJ8C9S4bYwuGhwjsm/x9BCIqBz7PcbaT3qNizs9sQ/t+czf4u08nhbNc+0OqzFVxA3zeeTvgoUPGX6IEfECTIzzUYjLWv/OsLZ7wtNlVVZXZJ/8AEqeokXWgfxL/8Ts+0bN9VmQKfyBvZrCMV1E+pz3+nZeYbkTbjPuB5e0UlPuVL0O7o7Yx0G0t7XqFygKlAjHMuRu+J7xRKo/fL6UYnDPJoKtj5Tceq2ggV73SvJXj0Z5fiVXwmnlCwSrH2v3aWi3Ba4xyiGcR1CuhssjwjP+wCrARJFdACBj2uLKiL5esn541FeDwmYyHHjrKwTNe7k=_1_1";
 
 function toXY(deg: number, rx: number, ry: number): [number, number] {
   const r = (deg - 90) * Math.PI / 180;
@@ -57,22 +56,6 @@ function getTextPos(a1: number, a2: number): [number, number] {
   return toXY(mid, 160, 155);
 }
 
-declare global {
-  interface Window {
-    AwsWafCaptcha?: {
-      renderCaptcha: (container: HTMLElement, options: {
-        apiKey: string;
-        onSuccess?: (wafToken: string) => void;
-        onError?: (error: unknown) => void;
-      }) => void;
-    };
-    AwsWafIntegration?: {
-      fetch: (url: string, options?: RequestInit) => Promise<Response>;
-      getToken?: () => Promise<string>;
-    };
-  }
-}
-
 export default function SeatSelectPage() {
   const { gameId } = useParams();
   const navigate = useNavigate();
@@ -85,37 +68,13 @@ export default function SeatSelectPage() {
   const [loadingSeats, setLoadingSeats] = useState(false);
   const stompClient = useRef<Client | null>(null);
 
-  // WAF CAPTCHA 관련 state
-  // captchaModalOpen: WAF가 실제로 405(CAPTCHA 필요)를 응답했을 때만 true
-  const [captchaModalOpen, setCaptchaModalOpen] = useState(false);
-  const [captchaError, setCaptchaError] = useState('');
-  const [captchaContainer, setCaptchaContainer] = useState<HTMLDivElement | null>(null);
-
   // 1단계: 구역 목록 조회 (페이지 진입 시)
-  // AwsWafIntegration.fetch로 호출 → WAF가 405(CAPTCHA)를 주면
-  // 그 시점에 모달을 띄움. axios가 아니라 WAF JS SDK의 fetch 래퍼를 써야
-  // 405 응답을 정상적으로 인식하고 WAF 토큰을 자동 관리할 수 있음.
+  // WAF CAPTCHA/Challenge는 axios 인터셉터(api/wafCaptcha.ts)에서 공통 처리
   const fetchZones = async () => {
-    const accessToken = localStorage.getItem('accessToken');
     setLoadingZones(true);
     try {
-      const result = await window.AwsWafIntegration!.fetch(
-        `${import.meta.env.VITE_API_URL || 'http://localhost:8080'}/api/games/${gameId}/seats`,
-        {
-          method: 'GET',
-          headers: { 'Authorization': `Bearer ${accessToken}` },
-        }
-      );
-
-      if (result.status === 405) {
-        // WAF가 CAPTCHA 액션으로 차단함
-        setCaptchaModalOpen(true);
-        setLoadingZones(false);
-        return;
-      }
-
-      const data = await result.json();
-      const zoneList = data.data.zones;
+      const res = await api.get(`/api/games/${gameId}/seats`);
+      const zoneList = res.data.data.zones;
       const zoneInfoList: ZoneInfo[] = zoneList.map((zone: any) => ({
         zoneId: zone.zoneId,
         zoneName: zone.zoneName,
@@ -136,25 +95,6 @@ export default function SeatSelectPage() {
   useEffect(() => {
     fetchZones();
   }, [gameId]);
-
-  // WAF CAPTCHA 렌더링 — captchaModalOpen이 true가 되고
-  // 모달의 div가 실제로 DOM에 마운트(captchaContainer)되면 호출
-  useEffect(() => {
-    if (captchaModalOpen && captchaContainer && window.AwsWafCaptcha) {
-      window.AwsWafCaptcha.renderCaptcha(captchaContainer, {
-        apiKey: WAF_CAPTCHA_API_KEY,
-        onSuccess: () => {
-          setCaptchaModalOpen(false);
-          setCaptchaError('');
-          fetchZones(); // 캡챠 통과 후 원래 요청 재시도
-        },
-        onError: (error) => {
-          console.error('WAF CAPTCHA 에러', error);
-          setCaptchaError('보안 인증 중 오류가 발생했습니다. 새로고침 해주세요.');
-        },
-      });
-    }
-  }, [captchaModalOpen, captchaContainer]);
 
   // 좌석 선택 페이지 진입 시 대기열 토큰 정리
   useEffect(() => {
@@ -257,7 +197,12 @@ export default function SeatSelectPage() {
       localStorage.setItem('lockToken', res.data.data.lockToken);
       localStorage.setItem('gameId', gameId!);
       navigate('/checkout');
-    } catch {
+    } catch (err: any) {
+      if (err?.response?.data?.message === 'QUEUE_NOT_PASSED') {
+        alert('대기열을 먼저 통과해 주세요.');
+        navigate(`/games/${gameId}`);
+        return;
+      }
       alert('좌석 선점에 실패했습니다. 다시 시도해주세요.');
     }
   };
@@ -283,30 +228,6 @@ export default function SeatSelectPage() {
   return (
     <div className="min-h-screen bg-gray-100">
       <Navbar />
-
-      {captchaModalOpen && (
-        <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
-          <div className="bg-white rounded-xl shadow-lg p-6 w-96">
-            <h2 className="text-center font-bold text-lg mb-1">클린예매 서비스</h2>
-            <p className="text-center text-sm text-gray-500 mb-4">
-              부정예매를 방지하기 위해 <span className="text-blue-600 font-bold">보안 인증</span> 후 예매가 가능합니다.
-            </p>
-
-            <div ref={setCaptchaContainer} />
-
-            {captchaError && (
-              <p className="text-red-500 text-xs mt-2 text-center">{captchaError}</p>
-            )}
-
-            <button
-              onClick={() => navigate(-1)}
-              className="w-full mt-4 py-2 border border-gray-300 rounded text-sm font-bold text-gray-600 hover:bg-gray-50"
-            >
-              날짜 다시 선택
-            </button>
-          </div>
-        </div>
-      )}
 
       <div className="max-w-6xl mx-auto px-4 py-6">
         <div className="flex gap-4">

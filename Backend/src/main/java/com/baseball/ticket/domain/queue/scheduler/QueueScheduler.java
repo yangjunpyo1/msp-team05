@@ -2,6 +2,7 @@ package com.baseball.ticket.domain.queue.scheduler;
 
 import com.baseball.ticket.domain.queue.entity.QueueToken;
 import com.baseball.ticket.domain.queue.repository.QueueTokenRepository;
+import com.baseball.ticket.domain.queue.service.QueuePassService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.scheduling.annotation.Scheduled;
@@ -17,6 +18,7 @@ import java.util.List;
 public class QueueScheduler {
 
     private final QueueTokenRepository queueTokenRepository;
+    private final QueuePassService queuePassService;
 
     private static final int MAX_ALLOWED_PER_GAME = 5;
 
@@ -48,6 +50,7 @@ public class QueueScheduler {
             for (QueueToken token : waiting) {
                 if (processed >= slots) break;
                 token.updateStatus("ALLOWED");
+                queuePassService.grant(gameId, token.getUser().getId());
                 processed++;
             }
         }

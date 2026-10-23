@@ -5,8 +5,9 @@
   <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>baseball-ticketing</title>
-  <script type="text/javascript" src="https://4368d814931e.edge.captcha-sdk.awswaf.com/4368d814931e/jsapi.js" defer></script>
-  <script type="text/javascript" src="https://4368d814931e.edge.sdk.awswaf.com/4368d814931e/6a9c86ac1103/challenge.js" defer></script>
+  <!-- AWS WAF SDK: Web ACL마다 주소가 다르므로 빌드 시 환경변수로 주입 (.env.example 참고) -->
+  <script type="text/javascript" src="%VITE_WAF_CAPTCHA_SDK_URL%" defer></script>
+  <script type="text/javascript" src="%VITE_WAF_CHALLENGE_SDK_URL%" defer></script>
 </head>
 <body>
 <div id="root"></div>
