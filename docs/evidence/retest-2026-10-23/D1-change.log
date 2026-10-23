@@ -1,0 +1,3 @@
+changed at 02:45:12 KST
+before: [{"Name":"TGT_TokenReuseIp","ActionToUse":{"Block":{}}},{"Name":"TGT_VolumetricSession","ActionToUse":{"Block":{}}}] | rules: 0:GeoBlockRule,1:BotControlRule,2:RateBasedRule,3:HealthCheckExceptionRule | ratelimit: 1000
+after: [{"Name":"TGT_TokenReuseIp","ActionToUse":{"Block":{}}}] | rules: 0:GeoBlockRule,1:BotControlRule,2:RateBasedRule,3:HealthCheckExceptionRule | ratelimit: 1000

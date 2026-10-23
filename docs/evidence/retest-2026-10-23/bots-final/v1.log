@@ -1,0 +1,8 @@
+[v1] start 03:58:41 KST (18:58:41Z) ip=집 IP(봇용)
+[HTTP Bot] 반복 실행 시작: 1회, 간격 1.0초
+[HTTP Bot] --- 시도 1/1 ---
+[HTTP Bot] /api/auth/login → 200 
+[HTTP Bot] 오류: Expecting value: line 1 column 1 (char 0)
+[HTTP Bot] 완료 — 성공: 0, 차단: 0, 전체: 1
+[HTTP Bot] 결과 저장 완료: bot_v1_results.csv (1건)
+[v1] end 03:58:43 KST exit=0

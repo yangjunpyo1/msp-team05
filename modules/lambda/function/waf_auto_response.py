@@ -103,6 +103,14 @@ def _update_rate_limit(new_limit: int):
             rule["Statement"]["RateBasedStatement"]["Limit"] = new_limit
             logger.info("RateBasedRule limit: %d → %d", current_limit, new_limit)
         updated_rules.append(rule)
+
+    # update_web_acl은 전체 교체 방식 — 넘기지 않은 설정(Description, CaptchaConfig 등)은 초기화되므로 그대로 전달
+    optional = {
+        key: web_acl[key]
+        for key in ("Description", "CustomResponseBodies", "CaptchaConfig",
+                    "ChallengeConfig", "TokenDomains", "AssociationConfig")
+        if web_acl.get(key)
+    }
     waf.update_web_acl(
         Name=web_acl["Name"],
         Scope=WAF_SCOPE,
@@ -111,5 +119,6 @@ def _update_rate_limit(new_limit: int):
         Rules=updated_rules,
         VisibilityConfig=web_acl["VisibilityConfig"],
         LockToken=lock_token,
+        **optional,
     )
     logger.info("WAF update complete. New rate limit: %d", new_limit)

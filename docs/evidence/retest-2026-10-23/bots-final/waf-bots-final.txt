@@ -1,0 +1,40 @@
+
+### v1 03:58:40~03:58:45
+ 03:58:43 BLOCK     BotControlRule/CategoryHttpLibrary            POST /api/auth/login | UA=python-requests/2.31.0 | token:absent bc:bot:category:http_library bc:bot:unverified captcha:absent bc:bot:name:python_requests bc:signal:non_browser_user_agent
+
+### v2 03:59:03~03:59:30
+ 03:59:08 ALLOW     Default_Action                                GET /login | UA=Mozilla/5.0 (Windows NT 10.0; Win64; x64 | 
+ 03:59:10 BLOCK     BotControlRule/SignalAutomatedBrowser         POST /api/auth/login | UA=Mozilla/5.0 (Windows NT 10.0; Win64; x64 | captcha:rejected token:accepted bc:signal:automated_browser
+
+### v4 04:00:10~04:00:43
+ 04:00:13 ALLOW     Default_Action                                POST /api/auth/login | UA=Mozilla/5.0 (Macintosh; Intel Mac OS X 1 | token:absent captcha:absent
+ 04:00:13 ALLOW     Default_Action                                GET /api/games | UA=Mozilla/5.0 (Macintosh; Intel Mac OS X 1 | token:absent captcha:absent
+ 04:00:14 ALLOW     Default_Action                                GET /api/games/{id}/seats | UA=Mozilla/5.0 (Macintosh; Intel Mac OS X 1 | token:absent captcha:absent
+ 04:00:40 ALLOW     Default_Action                                POST /api/games/{id}/seats/lock | UA=Mozilla/5.0 (Macintosh; Intel Mac OS X 1 | token:absent captcha:absent
+ 04:00:40 ALLOW     Default_Action                                POST /api/payments/prepare | UA=Mozilla/5.0 (Macintosh; Intel Mac OS X 1 | token:absent captcha:absent
+ 04:00:41 ALLOW     Default_Action                                POST /api/payments/confirm | UA=Mozilla/5.0 (Macintosh; Intel Mac OS X 1 | token:absent captcha:absent
+ 04:00:41 CHALLENGE TokenAbsentChallengeRule                      POST /api/reservations | UA=Mozilla/5.0 (Macintosh; Intel Mac OS X 1 | token:absent captcha:absent
+
+### v6 04:01:01~04:01:06
+ 04:01:04 BLOCK     BotControlRule/CategoryHttpLibrary            POST /api/auth/login | UA=python-requests/2.31.0 | token:absent bc:bot:category:http_library bc:bot:unverified bc:targeted:aggregate:volumetric:ip:token_absent captcha:absent bc:bot:name:python_requests bc:signal:non_browser_user_agent
+
+### v7 04:01:23~04:01:28
+ 04:01:25 BLOCK     BotControlRule/SignalNonBrowserUserAgent      POST /api/auth/login | UA=tls-client/1.0.1 | token:absent bc:targeted:aggregate:volumetric:ip:token_absent captcha:absent bc:signal:non_browser_user_agent
+
+### v7_ua 04:01:45~04:01:50
+ 04:01:47 CHALLENGE BotControlRule/TGT_VolumetricIpTokenAbsent    POST /api/auth/login | UA=Mozilla/5.0 (Windows NT 10.0; Win64; x64 | token:absent bc:targeted:aggregate:volumetric:ip:token_absent captcha:absent
+
+### v5 04:04:00~04:04:15
+ 04:04:13 CHALLENGE BotControlRule/TGT_VolumetricIpTokenAbsent    GET /api/games | UA=Mozilla/5.0 (Windows NT 10.0; Win64; x64 | token:absent bc:targeted:aggregate:volumetric:ip:token_absent captcha:absent
+ 04:04:13 CHALLENGE BotControlRule/TGT_VolumetricIpTokenAbsent    GET /api/games | UA=Mozilla/5.0 (Macintosh; Intel Mac OS X 1 | token:absent bc:targeted:aggregate:volumetric:ip:token_absent captcha:absent
+ 04:04:13 CHALLENGE BotControlRule/TGT_VolumetricIpTokenAbsent    GET /api/games | UA=Mozilla/5.0 (Macintosh; Intel Mac OS X 1 | token:absent bc:targeted:aggregate:volumetric:ip:token_absent captcha:absent
+ 04:04:13 CHALLENGE BotControlRule/TGT_VolumetricIpTokenAbsent    GET /api/games | UA=Mozilla/5.0 (Macintosh; Intel Mac OS X 1 | token:absent bc:targeted:aggregate:volumetric:ip:token_absent captcha:absent
+ 04:04:13 CHALLENGE BotControlRule/TGT_VolumetricIpTokenAbsent    GET /api/games | UA=Mozilla/5.0 (Macintosh; Intel Mac OS X 1 | token:absent bc:targeted:aggregate:volumetric:ip:token_absent captcha:absent
+ 04:04:13 CHALLENGE BotControlRule/TGT_VolumetricIpTokenAbsent    GET /api/games | UA=Mozilla/5.0 (Windows NT 10.0; Win64; x64 | token:absent bc:targeted:aggregate:volumetric:ip:token_absent captcha:absent
+ 04:04:13 CHALLENGE BotControlRule/TGT_VolumetricIpTokenAbsent    GET /api/games | UA=Mozilla/5.0 (Macintosh; Intel Mac OS X 1 | token:absent bc:targeted:aggregate:volumetric:ip:token_absent captcha:absent
+ 04:04:13 CHALLENGE BotControlRule/TGT_VolumetricIpTokenAbsent    GET /api/games | UA=Mozilla/5.0 (Macintosh; Intel Mac OS X 1 | token:absent bc:targeted:aggregate:volumetric:ip:token_absent captcha:absent
+ 04:04:13 CHALLENGE BotControlRule/TGT_VolumetricIpTokenAbsent    GET /api/games | UA=Mozilla/5.0 (Windows NT 10.0; Win64; x64 | token:absent bc:targeted:aggregate:volumetric:ip:token_absent captcha:absent
+ 04:04:13 CHALLENGE BotControlRule/TGT_VolumetricIpTokenAbsent    GET /api/games | UA=Mozilla/5.0 (Macintosh; Intel Mac OS X 1 | token:absent bc:targeted:aggregate:volumetric:ip:token_absent captcha:absent
+
+### v3 04:05:20~04:05:28
+ 04:05:26 BLOCK     BotControlRule/SignalAutomatedBrowser         POST /api/auth/login | UA=Mozilla/5.0 (Windows NT 10.0; Win64; x64 | token:absent bc:targeted:aggregate:volumetric:ip:token_absent bc:signal:automated_browser captcha:absent

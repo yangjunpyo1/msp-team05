@@ -1,0 +1,3 @@
+applied 03:36:14 KST
+before: 0:GeoBlockRule(Block), 1:BotControlRule(None), 2:RateBasedRule(Block), 3:HealthCheckExceptionRule(Allow) | botOverrides: TGT_TokenReuseIp | rate: 1000
+after: 0:GeoBlockRule(Block), 1:BotControlRule(None), 2:TokenAbsentChallengeRule(Challenge), 3:RateBasedRule(Block), 4:HealthCheckExceptionRule(Allow) | botOverrides: TGT_TokenReuseIp | rate: 1000

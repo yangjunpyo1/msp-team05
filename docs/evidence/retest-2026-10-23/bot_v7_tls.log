@@ -1,0 +1,25 @@
+[bot_v7_tls] start 00:27:51 KST (15:27:51Z) ip=집 IP(봇용)
+이메일 입력: 비밀번호 입력: TLS 클라이언트 선택
+1. chrome_120
+2. firefox_120
+3. safari_16_0
+선택 (1/2/3): [TLS] 클라이언트: chrome_120
+Traceback (most recent call last):
+  File "C:\Users\양준표\AppData\Local\Temp\claude\C--Users-----IdeaProjects-msp-team05\e42bf758-5be9-4856-b8c5-89735281b0c7\scratchpad\bots\bot_v7_tls.py", line 260, in <module>
+    login()
+  File "C:\Users\양준표\AppData\Local\Temp\claude\C--Users-----IdeaProjects-msp-team05\e42bf758-5be9-4856-b8c5-89735281b0c7\scratchpad\bots\bot_v7_tls.py", line 46, in login
+    token = res.json()["data"]["accessToken"]
+            ^^^^^^^^^^
+  File "C:\Users\양준표\AppData\Local\Programs\Python\Python311\Lib\site-packages\tls_client\response.py", line 38, in json
+    return json.loads(self.text, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\양준표\AppData\Local\Programs\Python\Python311\Lib\json\__init__.py", line 346, in loads
+    return _default_decoder.decode(s)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\양준표\AppData\Local\Programs\Python\Python311\Lib\json\decoder.py", line 337, in decode
+    obj, end = self.raw_decode(s, idx=_w(s, 0).end())
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\양준표\AppData\Local\Programs\Python\Python311\Lib\json\decoder.py", line 355, in raw_decode
+    raise JSONDecodeError("Expecting value", s, err.value) from None
+json.decoder.JSONDecodeError: Expecting value: line 1 column 1 (char 0)
+[bot_v7_tls] end 00:27:53 KST

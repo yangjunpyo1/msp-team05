@@ -1,0 +1,15 @@
+
+## 핫스팟 IP(사람용)-E 03:28:15~03:28:59 total=25 actions={"ALLOW":25} /api=13 lock=1 POST reservations=1 tokens=aee9ff4d volLabels=none captchaAcceptedReqs=0
+  03:28:16 ALLOW Default_Action GET /api/reservations rejected:not_solved/captcha:rejected 
+  03:28:18 ALLOW Default_Action GET /api/games rejected:not_solved/captcha:rejected 
+  03:28:36 ALLOW Default_Action GET /api/games/{id} rejected:not_solved/captcha:rejected 
+  03:28:37 ALLOW Default_Action POST /api/queue/enter rejected:not_solved/captcha:rejected 
+  03:28:40 ALLOW Default_Action GET /api/queue/status/{id} rejected:not_solved/captcha:rejected 
+  03:28:40 ALLOW Default_Action DELETE /api/queue/exit/{id} rejected:not_solved/captcha:rejected 
+  03:28:40 ALLOW Default_Action GET /api/games/{id}/seats rejected:not_solved/captcha:rejected 
+  03:28:46 ALLOW Default_Action GET /api/games/{id}/seats rejected:not_solved/captcha:rejected 
+  03:28:57 ALLOW Default_Action POST /api/games/{id}/seats/lock rejected:not_solved/captcha:rejected 
+  03:28:58 ALLOW Default_Action POST /api/payments/prepare rejected:not_solved/captcha:rejected 
+  03:28:58 ALLOW Default_Action POST /api/payments/confirm rejected:not_solved/captcha:rejected 
+  03:28:58 ALLOW Default_Action POST /api/reservations rejected:not_solved/captcha:rejected 
+  03:28:59 ALLOW Default_Action GET /api/reservations rejected:not_solved/captcha:rejected 

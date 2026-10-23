@@ -1,0 +1,167 @@
+window 03:36:00~03:59:59 KST, records=172, files=6
+
+## session 9cecff09 핫스팟 IP(사람용)-E Windows Chrome
+  03:38:11 ALLOW     GET    /                                     
+  03:38:11 ALLOW     GET    /api/games                           token:absent captcha:absent 
+  03:38:27 ALLOW     POST   /api/auth/login                      captcha:rejected token:accepted 
+  03:38:28 ALLOW     GET    /api/games                           captcha:rejected token:accepted 
+  03:38:29 ALLOW     GET    /api/games/{id}                      captcha:rejected token:accepted 
+  03:38:32 ALLOW     POST   /api/queue/enter                     captcha:rejected token:accepted 
+  03:38:35 ALLOW     GET    /api/queue/status/{id}               captcha:rejected token:accepted 
+  03:38:35 ALLOW     GET    /ws/seats/info                        
+  03:38:35 ALLOW     DELETE /api/queue/exit/{id}                 captcha:rejected token:accepted 
+  03:38:35 ALLOW     GET    /api/games/{id}/seats                captcha:rejected token:accepted 
+  03:38:35 ALLOW     GET    /ws/seats/774/tzgfyn5t/websocket      
+  03:39:03 ALLOW     GET    /api/games/{id}/seats                captcha:rejected token:accepted 
+  03:39:07 ALLOW     POST   /api/games/{id}/seats/lock           captcha:rejected token:accepted 
+  03:39:08 ALLOW     POST   /api/payments/prepare                captcha:rejected token:accepted 
+  03:39:08 ALLOW     POST   /api/payments/confirm                captcha:rejected token:accepted 
+  03:39:08 ALLOW     POST   /api/reservations                    captcha:rejected token:accepted 
+  03:39:10 ALLOW     GET    /api/reservations                    captcha:rejected token:accepted 
+  03:39:44 ALLOW     GET    /                                     
+  03:39:44 ALLOW     GET    /api/games                           captcha:rejected token:accepted 
+  03:39:47 ALLOW     GET    /api/games/{id}                      captcha:rejected token:accepted 
+  03:39:50 ALLOW     POST   /api/queue/enter                     captcha:rejected token:accepted 
+  03:39:53 ALLOW     GET    /api/queue/status/{id}               captcha:rejected token:accepted 
+  03:39:53 ALLOW     GET    /api/games/{id}/seats                captcha:rejected token:accepted 
+  03:39:53 ALLOW     DELETE /api/queue/exit/{id}                 captcha:rejected token:accepted 
+  03:39:53 ALLOW     GET    /ws/seats/info                        
+  03:39:53 ALLOW     GET    /ws/seats/470/qfkgctd3/websocket      
+  03:40:22 ALLOW     GET    /api/games/{id}/seats                captcha:rejected token:accepted 
+  03:40:26 CAPTCHA   POST   /api/games/{id}/seats/lock           volumetric:session:medium captcha:rejected token:accepted volumetric:session:high volumetric:session:low <= BotControlRule/TGT_VolumetricSession
+  03:40:33 ALLOW     POST   /api/games/{id}/seats/lock           volumetric:session:medium token:accepted volumetric:session:high captcha:accepted volumetric:session:low 
+  03:40:34 ALLOW     POST   /api/payments/prepare                volumetric:session:medium token:accepted volumetric:session:high captcha:accepted volumetric:session:low 
+  03:40:35 ALLOW     POST   /api/payments/confirm                volumetric:session:medium token:accepted volumetric:session:high captcha:accepted volumetric:session:low 
+  03:40:35 ALLOW     POST   /api/reservations                    volumetric:session:medium token:accepted volumetric:session:high captcha:accepted volumetric:session:low 
+  03:40:36 ALLOW     GET    /api/reservations                    volumetric:session:medium token:accepted volumetric:session:high captcha:accepted volumetric:session:low 
+  03:40:42 ALLOW     GET    /                                     
+  03:40:42 ALLOW     GET    /api/games                           volumetric:session:medium token:accepted volumetric:session:high captcha:accepted volumetric:session:low 
+  03:40:45 ALLOW     GET    /api/games/{id}                      volumetric:session:medium token:accepted volumetric:session:high captcha:accepted volumetric:session:low 
+  03:40:46 ALLOW     POST   /api/queue/enter                     volumetric:session:medium token:accepted volumetric:session:high captcha:accepted volumetric:session:low 
+  03:40:49 ALLOW     GET    /api/queue/status/{id}               volumetric:session:medium token:accepted volumetric:session:high captcha:accepted volumetric:session:low 
+  03:40:49 ALLOW     GET    /api/games/{id}/seats                volumetric:session:medium token:accepted volumetric:session:high captcha:accepted volumetric:session:low 
+  03:40:49 ALLOW     GET    /ws/seats/info                        
+  03:40:49 ALLOW     DELETE /api/queue/exit/{id}                 volumetric:session:medium token:accepted volumetric:session:high captcha:accepted volumetric:session:low 
+  03:40:49 ALLOW     GET    /ws/seats/438/0goft3rt/websocket      
+  03:40:55 ALLOW     GET    /api/games/{id}/seats                volumetric:session:medium token:accepted volumetric:session:high captcha:accepted volumetric:session:low 
+  03:40:59 ALLOW     POST   /api/games/{id}/seats/lock           volumetric:session:medium token:accepted volumetric:session:high captcha:accepted volumetric:session:low 
+  03:41:00 ALLOW     POST   /api/payments/prepare                volumetric:session:medium token:accepted volumetric:session:high captcha:accepted volumetric:session:low 
+  03:41:00 ALLOW     POST   /api/payments/confirm                volumetric:session:medium token:accepted volumetric:session:high captcha:accepted volumetric:session:low 
+  03:41:00 ALLOW     POST   /api/reservations                    volumetric:session:medium token:accepted volumetric:session:high captcha:accepted volumetric:session:low 
+  03:41:02 ALLOW     GET    /api/reservations                    volumetric:session:medium token:accepted volumetric:session:high captcha:accepted volumetric:session:low 
+  03:41:07 ALLOW     GET    /                                     
+  03:41:07 ALLOW     GET    /api/games                           volumetric:session:medium token:accepted volumetric:session:high captcha:accepted volumetric:session:low 
+  03:41:09 ALLOW     GET    /api/games/{id}                      volumetric:session:medium token:accepted volumetric:session:high captcha:accepted volumetric:session:low 
+  03:41:12 ALLOW     POST   /api/queue/enter                     volumetric:session:medium token:accepted volumetric:session:high captcha:accepted volumetric:session:maximum volumetric:session:low 
+  03:41:15 ALLOW     GET    /api/queue/status/{id}               volumetric:session:medium token:accepted volumetric:session:high captcha:accepted volumetric:session:low 
+  03:41:15 ALLOW     DELETE /api/queue/exit/{id}                 volumetric:session:medium token:accepted volumetric:session:high captcha:accepted volumetric:session:low 
+  03:41:15 ALLOW     GET    /ws/seats/info                        
+  03:41:15 ALLOW     GET    /api/games/{id}/seats                volumetric:session:medium token:accepted volumetric:session:high captcha:accepted volumetric:session:low 
+  03:41:15 ALLOW     GET    /ws/seats/433/owxv4230/websocket      
+  03:41:21 ALLOW     GET    /api/games/{id}/seats                volumetric:session:medium token:accepted volumetric:session:high captcha:accepted volumetric:session:low 
+  03:41:27 ALLOW     POST   /api/games/{id}/seats/lock           volumetric:session:medium token:accepted volumetric:session:high captcha:accepted volumetric:session:low 
+  03:41:29 ALLOW     POST   /api/payments/prepare                volumetric:session:medium token:accepted volumetric:session:high captcha:accepted volumetric:session:low 
+  03:41:29 ALLOW     POST   /api/payments/confirm                volumetric:session:medium token:accepted volumetric:session:high captcha:accepted volumetric:session:low 
+  03:41:29 ALLOW     POST   /api/reservations                    volumetric:session:medium token:accepted volumetric:session:high captcha:accepted volumetric:session:low 
+  03:41:30 ALLOW     GET    /api/reservations                    volumetric:session:medium token:accepted volumetric:session:high captcha:accepted volumetric:session:low 
+  03:42:22 ALLOW     GET    /                                     
+  03:42:22 ALLOW     GET    /api/games                           volumetric:session:medium token:accepted volumetric:session:high captcha:accepted volumetric:session:low 
+  03:42:28 ALLOW     GET    /api/games/{id}                      volumetric:session:medium token:accepted volumetric:session:high captcha:accepted volumetric:session:low 
+  03:42:29 ALLOW     POST   /api/queue/enter                     volumetric:session:medium token:accepted volumetric:session:high captcha:accepted volumetric:session:low 
+  03:42:33 ALLOW     GET    /api/queue/status/{id}               volumetric:session:medium token:accepted volumetric:session:high captcha:accepted volumetric:session:low 
+  03:42:33 ALLOW     DELETE /api/queue/exit/{id}                 volumetric:session:medium token:accepted volumetric:session:high captcha:accepted volumetric:session:low 
+  03:42:33 ALLOW     GET    /api/games/{id}/seats                volumetric:session:medium token:accepted volumetric:session:high captcha:accepted volumetric:session:low 
+  03:42:33 ALLOW     GET    /ws/seats/info                        
+  03:42:33 ALLOW     GET    /ws/seats/429/525x2zhq/websocket      
+  03:42:59 ALLOW     GET    /api/games/{id}/seats                volumetric:session:medium token:accepted volumetric:session:high captcha:accepted volumetric:session:low 
+  03:43:11 ALLOW     POST   /api/games/{id}/seats/lock           volumetric:session:medium token:accepted volumetric:session:high captcha:accepted volumetric:session:low 
+  03:43:13 ALLOW     POST   /api/payments/prepare                volumetric:session:medium token:accepted volumetric:session:high captcha:accepted volumetric:session:low 
+  03:43:13 ALLOW     POST   /api/payments/confirm                volumetric:session:medium token:accepted volumetric:session:high captcha:accepted volumetric:session:low 
+  03:43:13 ALLOW     POST   /api/reservations                    volumetric:session:medium token:accepted volumetric:session:high captcha:accepted volumetric:session:low 
+  03:43:14 ALLOW     GET    /api/reservations                    volumetric:session:medium token:accepted volumetric:session:high captcha:accepted volumetric:session:low 
+  03:43:18 ALLOW     GET    /                                     
+  03:43:19 ALLOW     GET    /api/games                           volumetric:session:medium token:accepted volumetric:session:high captcha:accepted volumetric:session:low 
+  03:43:21 ALLOW     GET    /api/games/{id}                      volumetric:session:medium token:accepted volumetric:session:high captcha:accepted volumetric:session:maximum volumetric:session:low 
+  03:43:24 ALLOW     POST   /api/queue/enter                     volumetric:session:medium token:accepted volumetric:session:high captcha:accepted volumetric:session:low 
+  03:43:27 ALLOW     GET    /api/queue/status/{id}               volumetric:session:medium token:accepted volumetric:session:high captcha:accepted volumetric:session:maximum volumetric:session:low 
+  03:43:27 ALLOW     GET    /api/games/{id}/seats                volumetric:session:medium token:accepted volumetric:session:high captcha:accepted volumetric:session:low 
+  03:43:27 ALLOW     DELETE /api/queue/exit/{id}                 volumetric:session:medium token:accepted volumetric:session:high captcha:accepted volumetric:session:low 
+  03:43:27 ALLOW     GET    /ws/seats/info                        
+  03:43:27 ALLOW     GET    /ws/seats/626/jr5c01os/websocket      
+  03:43:32 ALLOW     GET    /api/games/{id}/seats                volumetric:session:medium token:accepted volumetric:session:high captcha:accepted volumetric:session:low 
+  03:43:40 ALLOW     POST   /api/games/{id}/seats/lock           volumetric:session:medium token:accepted volumetric:session:high captcha:accepted volumetric:session:maximum volumetric:session:low 
+  03:43:42 ALLOW     POST   /api/payments/prepare                volumetric:session:medium token:accepted volumetric:session:high captcha:accepted volumetric:session:low 
+  03:43:42 ALLOW     POST   /api/payments/confirm                volumetric:session:medium token:accepted volumetric:session:high captcha:accepted volumetric:session:low 
+  03:43:42 ALLOW     POST   /api/reservations                    volumetric:session:medium token:accepted volumetric:session:high captcha:accepted volumetric:session:low 
+  03:43:43 ALLOW     GET    /api/reservations                    volumetric:session:medium token:accepted volumetric:session:high captcha:accepted volumetric:session:low 
+  03:43:48 ALLOW     GET    /                                     
+  03:43:48 ALLOW     GET    /api/games                           volumetric:session:medium token:accepted volumetric:session:high captcha:accepted volumetric:session:low 
+  03:43:51 ALLOW     GET    /api/games/{id}                      volumetric:session:medium token:accepted volumetric:session:high captcha:accepted volumetric:session:low 
+  03:43:52 ALLOW     POST   /api/queue/enter                     volumetric:session:medium token:accepted volumetric:session:high captcha:accepted volumetric:session:low 
+  03:43:56 ALLOW     GET    /api/queue/status/{id}               volumetric:session:medium token:accepted volumetric:session:high captcha:accepted volumetric:session:low 
+  03:43:56 ALLOW     GET    /api/games/{id}/seats                volumetric:session:medium token:accepted volumetric:session:high captcha:accepted volumetric:session:low 
+  03:43:56 ALLOW     GET    /ws/seats/info                        
+  03:43:56 ALLOW     DELETE /api/queue/exit/{id}                 volumetric:session:medium token:accepted volumetric:session:high captcha:accepted volumetric:session:low 
+  03:43:56 ALLOW     GET    /ws/seats/853/owqrekpy/websocket      
+  03:43:56 ALLOW     POST   /ws/seats/853/xinu5i0d/xhr_streaming  
+  03:43:56 ALLOW     POST   /ws/seats/853/xinu5i0d/xhr_send       
+  03:44:26 ALLOW     GET    /api/games/{id}/seats                volumetric:session:medium token:accepted volumetric:session:high captcha:accepted volumetric:session:low 
+  03:44:32 ALLOW     GET    /api/games/{id}/seats                volumetric:session:medium token:accepted volumetric:session:high captcha:accepted volumetric:session:low 
+  03:44:39 ALLOW     POST   /api/games/{id}/seats/lock           volumetric:session:medium token:accepted volumetric:session:high captcha:accepted volumetric:session:low 
+  03:44:40 ALLOW     POST   /api/payments/prepare                volumetric:session:medium token:accepted volumetric:session:high captcha:accepted volumetric:session:low 
+  03:44:40 ALLOW     POST   /api/payments/confirm                volumetric:session:medium token:accepted volumetric:session:high captcha:accepted volumetric:session:low 
+  03:44:40 ALLOW     POST   /api/reservations                    volumetric:session:medium token:accepted volumetric:session:high captcha:accepted volumetric:session:low 
+  03:44:42 ALLOW     GET    /api/reservations                    volumetric:session:medium token:accepted volumetric:session:high captcha:accepted volumetric:session:low 
+  03:44:46 ALLOW     GET    /api/games                           volumetric:session:medium token:accepted volumetric:session:high captcha:accepted volumetric:session:low 
+  03:44:47 ALLOW     GET    /api/games/{id}                      volumetric:session:medium token:accepted volumetric:session:high captcha:accepted volumetric:session:low 
+  03:44:49 ALLOW     POST   /api/queue/enter                     volumetric:session:medium token:accepted volumetric:session:high captcha:accepted volumetric:session:low 
+  03:44:52 ALLOW     GET    /api/queue/status/{id}               volumetric:session:medium token:accepted volumetric:session:high captcha:accepted volumetric:session:low 
+  03:44:52 ALLOW     GET    /api/games/{id}/seats                volumetric:session:medium token:accepted volumetric:session:high captcha:accepted volumetric:session:low 
+  03:44:52 ALLOW     DELETE /api/queue/exit/{id}                 volumetric:session:medium token:accepted volumetric:session:high captcha:accepted volumetric:session:low 
+  03:44:52 ALLOW     GET    /ws/seats/info                        
+  03:44:52 ALLOW     GET    /ws/seats/084/xugskztv/websocket      
+  03:45:00 ALLOW     GET    /api/games/{id}/seats                volumetric:session:medium token:accepted volumetric:session:high captcha:accepted volumetric:session:low 
+  03:45:04 ALLOW     POST   /api/games/{id}/seats/lock           volumetric:session:medium token:accepted volumetric:session:high captcha:accepted volumetric:session:low 
+  03:45:05 ALLOW     POST   /api/payments/prepare                volumetric:session:medium token:accepted volumetric:session:high captcha:accepted volumetric:session:low 
+  03:45:05 ALLOW     POST   /api/payments/confirm                volumetric:session:medium token:accepted volumetric:session:high captcha:accepted volumetric:session:low 
+  03:45:05 ALLOW     POST   /api/reservations                    volumetric:session:medium token:accepted volumetric:session:high captcha:accepted volumetric:session:low 
+  03:45:06 ALLOW     GET    /api/reservations                    volumetric:session:medium token:accepted volumetric:session:high captcha:accepted volumetric:session:low 
+
+## session 82864f86 핫스팟 IP(사람용)-F iPhone Safari
+  03:45:25 ALLOW     GET    /                                     
+  03:45:27 ALLOW     GET    /api/games                           captcha:rejected token:accepted 
+  03:45:29 ALLOW     GET    /                                     
+  03:45:29 ALLOW     GET    /api/games                           captcha:rejected token:accepted 
+  03:45:30 ALLOW     GET    /api/games/{id}                      captcha:rejected token:accepted 
+  03:45:49 ALLOW     POST   /api/auth/login                      captcha:rejected token:accepted 
+  03:45:50 ALLOW     GET    /api/games                           captcha:rejected token:accepted 
+  03:45:51 ALLOW     GET    /api/games/{id}                      captcha:rejected token:accepted 
+  03:45:53 ALLOW     POST   /api/queue/enter                     captcha:rejected token:accepted 
+  03:45:57 ALLOW     GET    /api/queue/status/{id}               captcha:rejected token:accepted 
+  03:45:57 ALLOW     GET    /ws/seats/info                        
+  03:45:57 ALLOW     DELETE /api/queue/exit/{id}                 captcha:rejected token:accepted 
+  03:45:57 ALLOW     GET    /api/games/{id}/seats                captcha:rejected token:accepted 
+  03:45:58 ALLOW     GET    /ws/seats/547/pl4dkrqo/websocket      
+  03:46:27 ALLOW     GET    /api/games/{id}/seats                captcha:rejected token:accepted 
+  03:46:35 ALLOW     POST   /api/games/{id}/seats/lock           captcha:rejected token:accepted 
+  03:46:36 ALLOW     POST   /api/payments/prepare                captcha:rejected token:accepted 
+  03:46:37 ALLOW     POST   /api/payments/confirm                captcha:rejected token:accepted 
+  03:46:37 ALLOW     POST   /api/reservations                    captcha:rejected token:accepted 
+  03:46:38 ALLOW     GET    /api/reservations                    captcha:rejected token:accepted 
+  03:46:39 ALLOW     GET    /reservations                         
+  03:46:40 ALLOW     GET    /api/reservations                    captcha:rejected token:accepted 
+  03:46:43 ALLOW     GET    /api/games                           captcha:rejected token:accepted 
+  03:46:44 ALLOW     GET    /api/games/{id}                      captcha:rejected token:accepted 
+  03:46:48 ALLOW     POST   /api/queue/enter                     captcha:rejected token:accepted 
+  03:46:51 ALLOW     GET    /api/queue/status/{id}               captcha:rejected token:accepted volumetric:session:low 
+  03:46:51 ALLOW     GET    /ws/seats/info                        
+  03:46:51 ALLOW     DELETE /api/queue/exit/{id}                 captcha:rejected token:accepted volumetric:session:low 
+  03:46:51 ALLOW     GET    /api/games/{id}/seats                captcha:rejected token:accepted volumetric:session:low 
+  03:46:52 ALLOW     GET    /ws/seats/967/5ighqvhv/websocket      
+  03:47:20 CAPTCHA   GET    /api/games/{id}/seats                volumetric:session:medium captcha:rejected token:accepted volumetric:session:high volumetric:session:low <= BotControlRule/TGT_VolumetricSession
+  03:47:34 ALLOW     GET    /api/games/{id}/seats                volumetric:session:medium token:accepted volumetric:session:high captcha:accepted volumetric:session:low 
+  03:47:45 ALLOW     POST   /api/games/{id}/seats/lock           volumetric:session:medium token:accepted volumetric:session:high captcha:accepted volumetric:session:low 
+  03:47:46 ALLOW     POST   /api/payments/prepare                volumetric:session:medium token:accepted volumetric:session:high captcha:accepted volumetric:session:low 
+  03:47:46 ALLOW     POST   /api/payments/confirm                volumetric:session:medium token:accepted volumetric:session:high captcha:accepted volumetric:session:low 
+  03:47:47 ALLOW     POST   /api/reservations                    volumetric:session:medium token:accepted volumetric:session:high captcha:accepted volumetric:session:low 
+  03:47:48 ALLOW     GET    /api/reservations                    volumetric:session:medium token:accepted volumetric:session:high captcha:accepted volumetric:session:low 

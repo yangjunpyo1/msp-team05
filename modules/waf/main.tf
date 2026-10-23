@@ -55,16 +55,10 @@ resource "aws_wafv2_web_acl" "main" {
           }
         }
 
-        # Targeted 규칙 중 토큰 재사용·세션 과다 요청은 Block으로 변경
+        # Targeted 규칙 중 토큰 재사용은 Block으로 변경
+        # TGT_VolumetricSession은 정상 사용자 오탐(2026-10-23 재검증)으로 기본 동작(CAPTCHA) 유지
         rule_action_override {
           name = "TGT_TokenReuseIp"
-          action_to_use {
-            block {}
-          }
-        }
-
-        rule_action_override {
-          name = "TGT_VolumetricSession"
           action_to_use {
             block {}
           }
@@ -93,10 +87,94 @@ resource "aws_wafv2_web_acl" "main" {
     }
   }
 
-  # 규칙 3 - Rate Based Rule (우선순위 2)
+  # 규칙 3 - 토큰 없는 대기열·좌석 선점·결제·예매 요청에 Challenge (우선순위 2)
+  # 라벨은 BotControlRule(scope /api/)이 붙이므로 반드시 그 뒤에 평가
+  rule {
+    name     = "TokenAbsentChallengeRule"
+    priority = 2
+
+    action {
+      challenge {}
+    }
+
+    statement {
+      and_statement {
+        statement {
+          label_match_statement {
+            scope = "LABEL"
+            key   = "awswaf:managed:token:absent"
+          }
+        }
+        statement {
+          or_statement {
+            statement {
+              byte_match_statement {
+                search_string         = "/api/queue/enter"
+                positional_constraint = "STARTS_WITH"
+                field_to_match {
+                  uri_path {}
+                }
+                text_transformation {
+                  priority = 0
+                  type     = "NONE"
+                }
+              }
+            }
+            statement {
+              byte_match_statement {
+                search_string         = "/api/reservations"
+                positional_constraint = "STARTS_WITH"
+                field_to_match {
+                  uri_path {}
+                }
+                text_transformation {
+                  priority = 0
+                  type     = "NONE"
+                }
+              }
+            }
+            statement {
+              byte_match_statement {
+                search_string         = "/seats/lock"
+                positional_constraint = "ENDS_WITH"
+                field_to_match {
+                  uri_path {}
+                }
+                text_transformation {
+                  priority = 0
+                  type     = "NONE"
+                }
+              }
+            }
+            statement {
+              byte_match_statement {
+                search_string         = "/api/payments/"
+                positional_constraint = "STARTS_WITH"
+                field_to_match {
+                  uri_path {}
+                }
+                text_transformation {
+                  priority = 0
+                  type     = "NONE"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+
+    visibility_config {
+      cloudwatch_metrics_enabled = true
+      metric_name                = "TokenAbsentChallengeRule"
+      sampled_requests_enabled   = true
+    }
+  }
+
+  # 규칙 4 - Rate Based Rule (우선순위 3)
   rule {
     name     = "RateBasedRule"
-    priority = 2
+    priority = 3
 
     action {
       block {}
@@ -147,10 +225,10 @@ resource "aws_wafv2_web_acl" "main" {
     }
   }
 
-  # 규칙 4 - 헬스체크 예외 처리 (우선순위 3)
+  # 규칙 5 - 헬스체크 예외 처리 (우선순위 4)
   rule {
     name     = "HealthCheckExceptionRule"
-    priority = 3
+    priority = 4
 
     action {
       allow {}

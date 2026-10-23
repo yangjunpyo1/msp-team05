@@ -1,0 +1,21 @@
+### now
+NOW()	@@session.time_zone
+2026-10-23 19:44:20	UTC
+### reservations 04:30~ by user (distinct lock_token = 예매 확정 횟수)
+user	bookings	seats	first_at	last_at
+adm***@kkybot.net	1	1	2026-10-24 04:36:00.501927	2026-10-24 04:36:00.501927
+wns***@naver.com	3	3	2026-10-24 04:40:53.162268	2026-10-24 04:41:48.814710
+### payments 04:20~
+### DONE payments with no reservation within 2 min (all time)
+### payment status counts
+status	COUNT(*)
+PAID	20
+
+### per user: PAID payments vs bookings(distinct lock_token)
+user	paid	bookings
+adm***@kkybot.net	2	1
+wns***@naver.com	18	18
+### users count / bot users
+total	botv5
+2	0
+

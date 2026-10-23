@@ -1,0 +1,24 @@
+files=24 records=770 range=23:13:52~04:05:26
+1 bot-test-ip 집 IP(봇용) POST /api/games/{id}/seats/lock token:absent ALLOW
+1 bot-test-ip 집 IP(봇용) POST /api/payments/confirm token:absent ALLOW
+1 bot-test-ip 집 IP(봇용) POST /api/payments/prepare token:absent ALLOW
+9 human-browser 핫스팟 IP(사람용)-E POST /api/games/{id}/seats/lock token:accepted ALLOW
+1 human-browser 핫스팟 IP(사람용)-E POST /api/games/{id}/seats/lock token:accepted CAPTCHA
+9 human-browser 핫스팟 IP(사람용)-E POST /api/payments/confirm token:accepted ALLOW
+9 human-browser 핫스팟 IP(사람용)-E POST /api/payments/prepare token:accepted ALLOW
+2 human-browser 핫스팟 IP(사람용)-A POST /api/games/{id}/seats/lock token:accepted ALLOW
+2 human-browser 핫스팟 IP(사람용)-A POST /api/payments/confirm token:accepted ALLOW
+2 human-browser 핫스팟 IP(사람용)-A POST /api/payments/prepare token:accepted ALLOW
+1 human-browser 핫스팟 IP(사람용)-B POST /api/games/{id}/seats/lock token:accepted ALLOW
+1 human-browser 핫스팟 IP(사람용)-B POST /api/payments/confirm token:accepted ALLOW
+1 human-browser 핫스팟 IP(사람용)-B POST /api/payments/prepare token:accepted ALLOW
+1 human-browser 핫스팟 IP(사람용)-D POST /api/games/{id}/seats/lock token:accepted ALLOW
+1 human-browser 핫스팟 IP(사람용)-D POST /api/payments/confirm token:accepted ALLOW
+1 human-browser 핫스팟 IP(사람용)-D POST /api/payments/prepare token:accepted ALLOW
+2 human-browser 핫스팟 IP(사람용)-F POST /api/games/{id}/seats/lock token:accepted ALLOW
+2 human-browser 핫스팟 IP(사람용)-F POST /api/payments/confirm token:accepted ALLOW
+2 human-browser 핫스팟 IP(사람용)-F POST /api/payments/prepare token:accepted ALLOW
+-- not accepted:
+04:00:40 bot-test-ip 집 IP(봇용) /api/games/{id}/seats/lock token:absent ALLOW UA=Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) Ap
+04:00:40 bot-test-ip 집 IP(봇용) /api/payments/prepare token:absent ALLOW UA=Mozilla/5.0 (Macintosh; Intel Mac OS X 14_4) Apple
+04:00:41 bot-test-ip 집 IP(봇용) /api/payments/confirm token:absent ALLOW UA=Mozilla/5.0 (Macintosh; Intel Mac OS X 14_4) Apple

@@ -1,0 +1,10 @@
+[v3] start 04:05:22 KST (19:05:22Z) ip=집 IP(봇용) venv playwright 1.60.0 / playwright-stealth 2.0.3
+[Playwright Bot] 반복 실행 시작: 1회, 간격 1.0초, 프록시 0개
+[Playwright Bot] --- 시도 1/1 ---
+[Playwright Bot] Stealth 모드 적용 완료
+[Playwright Bot] /api/auth/login → 200 proxy= 
+[Playwright Bot] 오류 발생: Expecting value: line 1 column 1 (char 0)
+[Playwright Bot] 차단 또는 오류: Expecting value: line 1 column 1 (char 0)
+[Playwright Bot] 완료 — 성공: 0, 차단/오류: 1, 전체: 1
+[Playwright Bot] 결과 저장 완료: bot_v3_results.csv (1건)
+[v3] end 04:05:26 KST

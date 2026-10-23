@@ -1,0 +1,128 @@
+total 137 since 2026-10-23T14:38:00Z
+## per IP
+핫스팟 IP(사람용)-A {"ALLOW":69,"BLOCK":10,"CAPTCHA":0,"CHALLENGE":0,"country":"KR"}
+핫스팟 IP(사람용)-B {"ALLOW":38,"BLOCK":20,"CAPTCHA":0,"CHALLENGE":0,"country":"KR"}
+## BLOCK/CAPTCHA/CHALLENGE detail (KST)
+23:40:56 핫스팟 IP(사람용)-A BLOCK BotControlRule/TGT_VolumetricSession GET /api/games/4362f8b1-1c5a-4fef-8c68-ac450301314c resp=
+23:40:58 핫스팟 IP(사람용)-A BLOCK BotControlRule/TGT_VolumetricSession GET /api/games resp=
+23:41:04 핫스팟 IP(사람용)-A BLOCK BotControlRule/TGT_VolumetricSession GET /api/reservations resp=
+23:41:14 핫스팟 IP(사람용)-A BLOCK BotControlRule/TGT_VolumetricSession POST /api/auth/login resp=
+23:41:28 핫스팟 IP(사람용)-A BLOCK BotControlRule/TGT_VolumetricSession POST /api/auth/signup resp=
+23:41:33 핫스팟 IP(사람용)-A BLOCK BotControlRule/TGT_VolumetricSession POST /api/auth/login resp=
+23:43:50 핫스팟 IP(사람용)-A BLOCK BotControlRule/TGT_VolumetricSession POST /api/auth/login resp=
+23:43:52 핫스팟 IP(사람용)-A BLOCK BotControlRule/TGT_VolumetricSession POST /api/auth/login resp=
+23:43:54 핫스팟 IP(사람용)-A BLOCK BotControlRule/TGT_VolumetricSession POST /api/auth/login resp=
+23:43:54 핫스팟 IP(사람용)-A BLOCK BotControlRule/TGT_VolumetricSession POST /api/auth/login resp=
+23:52:40 핫스팟 IP(사람용)-B BLOCK BotControlRule/TGT_VolumetricSession GET /api/games/4362f8b1-1c5a-4fef-8c68-ac450301314c/seats resp=
+23:53:18 핫스팟 IP(사람용)-B BLOCK BotControlRule/TGT_VolumetricSession GET /api/games/4362f8b1-1c5a-4fef-8c68-ac450301314c/seats resp=
+23:53:54 핫스팟 IP(사람용)-B BLOCK BotControlRule/TGT_VolumetricSession GET /api/reservations resp=
+23:53:55 핫스팟 IP(사람용)-B BLOCK BotControlRule/TGT_VolumetricSession GET /api/games resp=
+23:53:59 핫스팟 IP(사람용)-B BLOCK BotControlRule/TGT_VolumetricSession GET /api/reservations resp=
+23:54:00 핫스팟 IP(사람용)-B BLOCK BotControlRule/TGT_VolumetricSession GET /api/games resp=
+23:54:40 핫스팟 IP(사람용)-B BLOCK BotControlRule/TGT_VolumetricSession GET /api/reservations resp=
+23:54:40 핫스팟 IP(사람용)-B BLOCK BotControlRule/TGT_VolumetricSession GET /api/games resp=
+23:54:40 핫스팟 IP(사람용)-B BLOCK BotControlRule/TGT_VolumetricSession GET /api/reservations resp=
+23:54:40 핫스팟 IP(사람용)-B BLOCK BotControlRule/TGT_VolumetricSession GET /api/games/4362f8b1-1c5a-4fef-8c68-ac450301314c/seats resp=
+23:54:40 핫스팟 IP(사람용)-B BLOCK BotControlRule/TGT_VolumetricSession POST /api/queue/enter resp=
+23:54:40 핫스팟 IP(사람용)-B BLOCK BotControlRule/TGT_VolumetricSession GET /api/games/4362f8b1-1c5a-4fef-8c68-ac450301314c resp=
+23:54:41 핫스팟 IP(사람용)-B BLOCK BotControlRule/TGT_VolumetricSession GET /api/games resp=
+23:54:41 핫스팟 IP(사람용)-B BLOCK BotControlRule/TGT_VolumetricSession GET /api/games/4362f8b1-1c5a-4fef-8c68-ac450301314c/seats resp=
+23:54:41 핫스팟 IP(사람용)-B BLOCK BotControlRule/TGT_VolumetricSession POST /api/queue/enter resp=
+23:54:41 핫스팟 IP(사람용)-B BLOCK BotControlRule/TGT_VolumetricSession GET /api/games/4362f8b1-1c5a-4fef-8c68-ac450301314c resp=
+23:54:41 핫스팟 IP(사람용)-B BLOCK BotControlRule/TGT_VolumetricSession GET /api/games resp=
+23:54:42 핫스팟 IP(사람용)-B BLOCK BotControlRule/TGT_VolumetricSession POST /api/queue/enter resp=
+23:54:42 핫스팟 IP(사람용)-B BLOCK BotControlRule/TGT_VolumetricSession GET /api/games/4362f8b1-1c5a-4fef-8c68-ac450301314c resp=
+23:54:42 핫스팟 IP(사람용)-B BLOCK BotControlRule/TGT_VolumetricSession GET /api/games resp=
+## 23:48-23:58 KST all requests
+23:48:32 핫스팟 IP(사람용)-A ALLOW Default_Action GET /
+23:48:33 핫스팟 IP(사람용)-A ALLOW Default_Action GET /assets/index-CtpPajyg.css
+23:48:33 핫스팟 IP(사람용)-A ALLOW Default_Action GET /assets/index-Dpe6fx93.js
+23:48:33 핫스팟 IP(사람용)-A ALLOW Default_Action GET /api/games
+23:48:33 핫스팟 IP(사람용)-A ALLOW Default_Action GET /favicon.svg
+23:48:40 핫스팟 IP(사람용)-A ALLOW Default_Action POST /api/auth/login
+23:48:41 핫스팟 IP(사람용)-A ALLOW Default_Action GET /api/games
+23:48:42 핫스팟 IP(사람용)-A ALLOW Default_Action GET /api/games/4362f8b1-1c5a-4fef-8c68-ac450301314c
+23:48:44 핫스팟 IP(사람용)-A ALLOW Default_Action POST /api/queue/enter
+23:48:47 핫스팟 IP(사람용)-A ALLOW Default_Action GET /api/queue/status/68af2b34-c7bb-4a3b-9f1a-0c5108d43c2f
+23:48:47 핫스팟 IP(사람용)-A ALLOW Default_Action GET /ws/seats/info
+23:48:47 핫스팟 IP(사람용)-A ALLOW Default_Action GET /api/games/4362f8b1-1c5a-4fef-8c68-ac450301314c/seats
+23:48:47 핫스팟 IP(사람용)-A ALLOW Default_Action DELETE /api/queue/exit/68af2b34-c7bb-4a3b-9f1a-0c5108d43c2f
+23:48:47 핫스팟 IP(사람용)-A ALLOW Default_Action GET /ws/seats/580/etks24co/websocket
+23:48:55 핫스팟 IP(사람용)-A ALLOW Default_Action GET /api/games/4362f8b1-1c5a-4fef-8c68-ac450301314c/seats
+23:49:02 핫스팟 IP(사람용)-A ALLOW Default_Action GET /api/games/4362f8b1-1c5a-4fef-8c68-ac450301314c/seats
+23:49:05 핫스팟 IP(사람용)-A ALLOW Default_Action GET /api/games/4362f8b1-1c5a-4fef-8c68-ac450301314c/seats
+23:49:10 핫스팟 IP(사람용)-A ALLOW Default_Action POST /api/games/4362f8b1-1c5a-4fef-8c68-ac450301314c/seats/lock
+23:49:11 핫스팟 IP(사람용)-A ALLOW Default_Action POST /api/payments/prepare
+23:49:11 핫스팟 IP(사람용)-A ALLOW Default_Action POST /api/payments/confirm
+23:49:11 핫스팟 IP(사람용)-A ALLOW Default_Action POST /api/reservations
+23:49:13 핫스팟 IP(사람용)-A ALLOW Default_Action GET /api/reservations
+23:49:52 핫스팟 IP(사람용)-A ALLOW Default_Action GET /reservations
+23:49:53 핫스팟 IP(사람용)-A ALLOW Default_Action GET /api/reservations
+23:49:59 핫스팟 IP(사람용)-A ALLOW Default_Action GET /
+23:49:59 핫스팟 IP(사람용)-A ALLOW Default_Action GET /api/games
+23:50:01 핫스팟 IP(사람용)-A ALLOW Default_Action GET /api/games/4362f8b1-1c5a-4fef-8c68-ac450301314c
+23:50:43 핫스팟 IP(사람용)-B ALLOW Default_Action GET /
+23:50:43 핫스팟 IP(사람용)-B ALLOW Default_Action GET /assets/index-Dpe6fx93.js
+23:50:43 핫스팟 IP(사람용)-B ALLOW Default_Action GET /assets/index-CtpPajyg.css
+23:50:44 핫스팟 IP(사람용)-B ALLOW Default_Action GET /api/games
+23:50:44 핫스팟 IP(사람용)-B ALLOW Default_Action GET /favicon.svg
+23:50:45 핫스팟 IP(사람용)-B ALLOW Default_Action GET /api/games/4362f8b1-1c5a-4fef-8c68-ac450301314c
+23:50:59 핫스팟 IP(사람용)-B ALLOW Default_Action POST /api/auth/login
+23:50:59 핫스팟 IP(사람용)-B ALLOW Default_Action GET /api/games
+23:51:00 핫스팟 IP(사람용)-B ALLOW Default_Action GET /api/games/4362f8b1-1c5a-4fef-8c68-ac450301314c
+23:51:01 핫스팟 IP(사람용)-B ALLOW Default_Action POST /api/queue/enter
+23:51:05 핫스팟 IP(사람용)-B ALLOW Default_Action GET /api/queue/status/40c556eb-2062-4f58-bd60-6c03cd4be3de
+23:51:08 핫스팟 IP(사람용)-B ALLOW Default_Action GET /api/queue/status/40c556eb-2062-4f58-bd60-6c03cd4be3de
+23:51:08 핫스팟 IP(사람용)-B ALLOW Default_Action DELETE /api/queue/exit/40c556eb-2062-4f58-bd60-6c03cd4be3de
+23:51:08 핫스팟 IP(사람용)-B ALLOW Default_Action GET /api/games/4362f8b1-1c5a-4fef-8c68-ac450301314c/seats
+23:51:08 핫스팟 IP(사람용)-B ALLOW Default_Action GET /ws/seats/info
+23:51:08 핫스팟 IP(사람용)-B ALLOW Default_Action GET /ws/seats/399/2vdmc1gn/websocket
+23:51:38 핫스팟 IP(사람용)-B ALLOW Default_Action GET /api/games/4362f8b1-1c5a-4fef-8c68-ac450301314c/seats
+23:51:51 핫스팟 IP(사람용)-B ALLOW Default_Action POST /api/games/4362f8b1-1c5a-4fef-8c68-ac450301314c/seats/lock
+23:51:52 핫스팟 IP(사람용)-B ALLOW Default_Action POST /api/payments/prepare
+23:51:52 핫스팟 IP(사람용)-B ALLOW Default_Action POST /api/payments/confirm
+23:51:52 핫스팟 IP(사람용)-B ALLOW Default_Action POST /api/reservations
+23:51:52 핫스팟 IP(사람용)-B ALLOW Default_Action GET /api/reservations
+23:52:15 핫스팟 IP(사람용)-B ALLOW Default_Action GET /reservations
+23:52:15 핫스팟 IP(사람용)-B ALLOW Default_Action GET /assets/index-CtpPajyg.css
+23:52:15 핫스팟 IP(사람용)-B ALLOW Default_Action GET /assets/index-Dpe6fx93.js
+23:52:15 핫스팟 IP(사람용)-B ALLOW Default_Action GET /api/reservations
+23:52:26 핫스팟 IP(사람용)-B ALLOW Default_Action GET /
+23:52:26 핫스팟 IP(사람용)-B ALLOW Default_Action GET /api/games
+23:52:27 핫스팟 IP(사람용)-B ALLOW Default_Action GET /api/games/4362f8b1-1c5a-4fef-8c68-ac450301314c
+23:52:30 핫스팟 IP(사람용)-B ALLOW Default_Action POST /api/queue/enter
+23:52:33 핫스팟 IP(사람용)-B ALLOW Default_Action GET /api/queue/status/686c4ec3-5dd8-414f-bb37-d99f526ef09d
+23:52:33 핫스팟 IP(사람용)-B ALLOW Default_Action GET /api/games/4362f8b1-1c5a-4fef-8c68-ac450301314c/seats
+23:52:33 핫스팟 IP(사람용)-B ALLOW Default_Action GET /ws/seats/info
+23:52:33 핫스팟 IP(사람용)-B ALLOW Default_Action DELETE /api/queue/exit/686c4ec3-5dd8-414f-bb37-d99f526ef09d
+23:52:33 핫스팟 IP(사람용)-B ALLOW Default_Action GET /ws/seats/811/m2f0sfqy/websocket
+23:52:40 핫스팟 IP(사람용)-B BLOCK BotControlRule GET /api/games/4362f8b1-1c5a-4fef-8c68-ac450301314c/seats
+23:53:18 핫스팟 IP(사람용)-B BLOCK BotControlRule GET /api/games/4362f8b1-1c5a-4fef-8c68-ac450301314c/seats
+23:53:54 핫스팟 IP(사람용)-B BLOCK BotControlRule GET /api/reservations
+23:53:55 핫스팟 IP(사람용)-B BLOCK BotControlRule GET /api/games
+23:53:59 핫스팟 IP(사람용)-B BLOCK BotControlRule GET /api/reservations
+23:54:00 핫스팟 IP(사람용)-B BLOCK BotControlRule GET /api/games
+23:54:17 핫스팟 IP(사람용)-A ALLOW Default_Action GET /games/4362f8b1-1c5a-4fef-8c68-ac450301314c
+23:54:17 핫스팟 IP(사람용)-A ALLOW Default_Action GET /assets/index-CtpPajyg.css
+23:54:17 핫스팟 IP(사람용)-A ALLOW Default_Action GET /assets/index-Dpe6fx93.js
+23:54:18 핫스팟 IP(사람용)-A ALLOW Default_Action GET /favicon.svg
+23:54:18 핫스팟 IP(사람용)-A ALLOW Default_Action GET /api/games/4362f8b1-1c5a-4fef-8c68-ac450301314c
+23:54:19 핫스팟 IP(사람용)-A ALLOW Default_Action GET /api/reservations
+23:54:19 핫스팟 IP(사람용)-A ALLOW Default_Action GET /favicon.svg
+23:54:40 핫스팟 IP(사람용)-B BLOCK BotControlRule GET /api/reservations
+23:54:40 핫스팟 IP(사람용)-B BLOCK BotControlRule GET /api/games
+23:54:40 핫스팟 IP(사람용)-B BLOCK BotControlRule GET /api/reservations
+23:54:40 핫스팟 IP(사람용)-B BLOCK BotControlRule GET /api/games/4362f8b1-1c5a-4fef-8c68-ac450301314c/seats
+23:54:40 핫스팟 IP(사람용)-B ALLOW Default_Action GET /ws/seats/info
+23:54:40 핫스팟 IP(사람용)-B BLOCK BotControlRule POST /api/queue/enter
+23:54:40 핫스팟 IP(사람용)-B BLOCK BotControlRule GET /api/games/4362f8b1-1c5a-4fef-8c68-ac450301314c
+23:54:41 핫스팟 IP(사람용)-B BLOCK BotControlRule GET /api/games
+23:54:41 핫스팟 IP(사람용)-B ALLOW Default_Action GET /ws/seats/info
+23:54:41 핫스팟 IP(사람용)-B BLOCK BotControlRule GET /api/games/4362f8b1-1c5a-4fef-8c68-ac450301314c/seats
+23:54:41 핫스팟 IP(사람용)-B ALLOW Default_Action GET /ws/seats/579/yw2dbek0/websocket
+23:54:41 핫스팟 IP(사람용)-B BLOCK BotControlRule POST /api/queue/enter
+23:54:41 핫스팟 IP(사람용)-B BLOCK BotControlRule GET /api/games/4362f8b1-1c5a-4fef-8c68-ac450301314c
+23:54:41 핫스팟 IP(사람용)-B BLOCK BotControlRule GET /api/games
+23:54:42 핫스팟 IP(사람용)-B BLOCK BotControlRule POST /api/queue/enter
+23:54:42 핫스팟 IP(사람용)-B BLOCK BotControlRule GET /api/games/4362f8b1-1c5a-4fef-8c68-ac450301314c
+23:54:42 핫스팟 IP(사람용)-B BLOCK BotControlRule GET /api/games

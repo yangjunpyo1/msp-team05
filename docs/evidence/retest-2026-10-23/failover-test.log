@@ -1,0 +1,18 @@
+terminate i-009e4ccc65b0d6006 at 00:01:09
+shutting-down
+00:01:30 +2s api=200 text/html 0.207330s tg=i-0c59449037d0ef3f4:healthy i-009e4ccc65b0d6006:healthy 
+00:01:43 +15s api=200 text/html 0.135299s tg=i-0c59449037d0ef3f4:healthy 
+00:01:56 +28s api=200 text/html 0.165675s tg=i-0c59449037d0ef3f4:healthy i-0aa02c1c17209d051:initial 
+00:02:11 +43s api=200 text/html 0.136499s tg=i-0c59449037d0ef3f4:healthy i-0aa02c1c17209d051:initial 
+00:02:26 +58s api=200 text/html 0.049531s tg=i-0c59449037d0ef3f4:healthy i-0aa02c1c17209d051:initial 
+00:02:38 +70s api=200 text/html 0.064967s tg=i-0c59449037d0ef3f4:healthy i-0aa02c1c17209d051:initial 
+00:02:50 +82s api=200 text/html 0.053289s tg=i-0c59449037d0ef3f4:healthy i-0aa02c1c17209d051:unhealthy 
+00:03:02 +94s api=200 text/html 0.028361s tg=i-0c59449037d0ef3f4:healthy i-0aa02c1c17209d051:unhealthy 
+00:03:14 +106s api=200 text/html 0.034976s tg=i-0c59449037d0ef3f4:healthy i-0aa02c1c17209d051:unhealthy 
+00:03:26 +118s api=200 text/html 0.050509s tg=i-0c59449037d0ef3f4:healthy i-0aa02c1c17209d051:unhealthy 
+00:03:38 +130s api=200 text/html 0.054655s tg=i-0c59449037d0ef3f4:healthy i-0aa02c1c17209d051:unhealthy 
+00:03:50 +142s api=200 text/html 0.038291s tg=i-0c59449037d0ef3f4:healthy i-0aa02c1c17209d051:unhealthy 
+00:04:03 +155s api=200 text/html 0.035883s tg=i-0c59449037d0ef3f4:healthy i-0aa02c1c17209d051:unhealthy 
+00:04:15 +167s api=200 text/html 0.035245s tg=i-0c59449037d0ef3f4:healthy i-0aa02c1c17209d051:unhealthy 
+00:04:27 +179s api=200 text/html 0.056921s tg=i-0c59449037d0ef3f4:healthy i-0aa02c1c17209d051:healthy 
+new instance healthy after 180s

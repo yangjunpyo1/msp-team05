@@ -1,0 +1,37 @@
+[v4] start 04:00:11 KST (19:00:11Z) ip=집 IP(봇용)
+이메일 입력: 비밀번호 입력: =======================================================
+Bot v4 — 좌석 선점 + 결제 + 예매 완료 전체 흐름
+=======================================================
+[로그인 성공] UA: Mozilla/5.0 (Macintosh; Intel Mac OS X 1...
+[경기] LG 트윈스 vs 두산 베어스 | 4362f8b1-1c5a-4fef-8c68-ac450301314c
+[3/6] 좌석 확인 | 3루 지정석 ¸열 1번 (15,000원)
+[5/6] 결제 준비 완료 | orderId=d3ae1e81... | 금액=15,000원 | 상태=READY
+[6/7] 결제 확정 완료 | orderId=d3ae1e81... | 상태=DONE
+Traceback (most recent call last):
+  File "C:\Users\양준표\AppData\Local\Programs\Python\Python311\Lib\site-packages\requests\models.py", line 971, in json
+    return complexjson.loads(self.text, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\양준표\AppData\Local\Programs\Python\Python311\Lib\json\__init__.py", line 346, in loads
+    return _default_decoder.decode(s)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\양준표\AppData\Local\Programs\Python\Python311\Lib\json\decoder.py", line 337, in decode
+    obj, end = self.raw_decode(s, idx=_w(s, 0).end())
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\양준표\AppData\Local\Programs\Python\Python311\Lib\json\decoder.py", line 355, in raw_decode
+    raise JSONDecodeError("Expecting value", s, err.value) from None
+json.decoder.JSONDecodeError: Expecting value: line 1 column 1 (char 0)
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\양준표\AppData\Local\Temp\claude\C--Users-----IdeaProjects-msp-team05\e42bf758-5be9-4856-b8c5-89735281b0c7\scratchpad\bots2\bot_v4_macro.py", line 228, in <module>
+    run()
+  File "C:\Users\양준표\AppData\Local\Temp\claude\C--Users-----IdeaProjects-msp-team05\e42bf758-5be9-4856-b8c5-89735281b0c7\scratchpad\bots2\bot_v4_macro.py", line 221, in run
+    create_reservation(token, lock_token, game_id)
+  File "C:\Users\양준표\AppData\Local\Temp\claude\C--Users-----IdeaProjects-msp-team05\e42bf758-5be9-4856-b8c5-89735281b0c7\scratchpad\bots2\bot_v4_macro.py", line 180, in create_reservation
+    data = res.json()
+           ^^^^^^^^^^
+  File "C:\Users\양준표\AppData\Local\Programs\Python\Python311\Lib\site-packages\requests\models.py", line 975, in json
+    raise RequestsJSONDecodeError(e.msg, e.doc, e.pos)
+requests.exceptions.JSONDecodeError: Expecting value: line 1 column 1 (char 0)
+[v4] end 04:00:41 KST exit=1

@@ -1,0 +1,63 @@
+window 04:38:30~04:44:59 KST, records=57, files=6
+
+## session 63b506f1 핫스팟 IP(사람용)-G Windows Chrome
+  04:39:53 ALLOW     GET    /                                     
+  04:39:54 ALLOW     GET    /api/games                           token:absent captcha:absent 
+  04:39:58 ALLOW     GET    /api/games/{id}                      captcha:rejected token:accepted 
+  04:40:08 ALLOW     POST   /api/auth/login                      captcha:rejected token:accepted 
+  04:40:09 ALLOW     GET    /api/games                           captcha:rejected token:accepted 
+  04:40:11 ALLOW     GET    /api/games/{id}                      captcha:rejected token:accepted 
+  04:40:13 ALLOW     POST   /api/queue/enter                     captcha:rejected token:accepted 
+  04:40:17 ALLOW     GET    /api/queue/status/{id}               captcha:rejected token:accepted 
+  04:40:17 ALLOW     GET    /ws/seats/info                        
+  04:40:17 ALLOW     DELETE /api/queue/exit/{id}                 captcha:rejected token:accepted 
+  04:40:17 ALLOW     GET    /api/games/{id}/seats                captcha:rejected token:accepted 
+  04:40:17 ALLOW     GET    /ws/seats/798/otrzb2bu/websocket      
+  04:40:47 ALLOW     GET    /api/games/{id}/seats                captcha:rejected token:accepted 
+  04:40:51 ALLOW     POST   /api/games/{id}/seats/lock           captcha:rejected token:accepted 
+  04:40:52 ALLOW     POST   /api/payments/prepare                captcha:rejected token:accepted 
+  04:40:53 ALLOW     POST   /api/payments/confirm                captcha:rejected token:accepted 
+  04:40:53 ALLOW     POST   /api/reservations                    captcha:rejected token:accepted 
+  04:40:54 ALLOW     GET    /api/reservations                    captcha:rejected token:accepted 
+  04:40:56 ALLOW     GET    /api/games                           captcha:rejected token:accepted 
+  04:40:57 ALLOW     GET    /api/games/{id}                      captcha:rejected token:accepted 
+  04:40:58 ALLOW     POST   /api/queue/enter                     captcha:rejected token:accepted 
+  04:41:01 ALLOW     GET    /api/queue/status/{id}               captcha:rejected token:accepted 
+  04:41:01 ALLOW     GET    /api/games/{id}/seats                captcha:rejected token:accepted 
+  04:41:01 ALLOW     GET    /ws/seats/info                        
+  04:41:01 ALLOW     DELETE /api/queue/exit/{id}                 captcha:rejected token:accepted 
+  04:41:01 ALLOW     GET    /ws/seats/523/alqo3zly/websocket      
+  04:41:07 ALLOW     GET    /api/games/{id}/seats                captcha:rejected token:accepted 
+  04:41:16 ALLOW     POST   /api/games/{id}/seats/lock           captcha:rejected token:accepted 
+  04:41:17 ALLOW     POST   /api/payments/prepare                captcha:rejected token:accepted 
+  04:41:17 ALLOW     POST   /api/payments/confirm                captcha:rejected token:accepted 
+  04:41:17 ALLOW     POST   /api/reservations                    captcha:rejected token:accepted 
+  04:41:18 ALLOW     GET    /api/reservations                    captcha:rejected token:accepted 
+
+## session 82864f86 핫스팟 IP(사람용)-H iPhone Safari
+  04:41:30 ALLOW     GET    /reservations                         
+  04:41:30 ALLOW     GET    /api/reservations                    token:rejected captcha:rejected 
+  04:41:32 ALLOW     GET    /api/games                           captcha:rejected token:accepted 
+  04:41:33 ALLOW     GET    /api/games/{id}                      captcha:rejected token:accepted 
+  04:41:35 ALLOW     POST   /api/queue/enter                     captcha:rejected token:accepted 
+  04:41:38 ALLOW     GET    /api/queue/status/{id}               captcha:rejected token:accepted 
+  04:41:38 ALLOW     GET    /api/games/{id}/seats                captcha:rejected token:accepted 
+  04:41:38 ALLOW     GET    /ws/seats/info                        
+  04:41:38 ALLOW     DELETE /api/queue/exit/{id}                 captcha:rejected token:accepted 
+  04:41:38 ALLOW     GET    /ws/seats/073/xhdag2xq/websocket      
+  04:41:44 ALLOW     GET    /api/games/{id}/seats                captcha:rejected token:accepted 
+  04:41:47 ALLOW     POST   /api/games/{id}/seats/lock           captcha:rejected token:accepted 
+  04:41:48 ALLOW     POST   /api/payments/prepare                captcha:rejected token:accepted 
+  04:41:48 ALLOW     POST   /api/payments/confirm                captcha:rejected token:accepted 
+  04:41:48 ALLOW     POST   /api/reservations                    captcha:rejected token:accepted 
+  04:41:49 ALLOW     GET    /api/reservations                    captcha:rejected token:accepted 
+
+## session (토큰 없음) 집 IP(봇용) Mozilla/5.0 (Macintosh; I
+  04:43:02 ALLOW     GET    /api/games                           token:absent captcha:absent 
+  04:43:03 ALLOW     GET    /api/games/{id}/seats                token:absent captcha:absent 
+  04:43:29 CHALLENGE POST   /api/games/{id}/seats/lock           token:absent captcha:absent <= TokenAbsentChallengeRule
+
+## session (토큰 없음) 집 IP(봇용) Mozilla/5.0 (Macintosh; I
+  04:43:02 ALLOW     GET    /api/games                           token:absent captcha:absent 
+  04:43:03 ALLOW     GET    /api/games/{id}/seats                token:absent captcha:absent 
+  04:43:29 CHALLENGE POST   /api/games/{id}/seats/lock           token:absent captcha:absent <= TokenAbsentChallengeRule

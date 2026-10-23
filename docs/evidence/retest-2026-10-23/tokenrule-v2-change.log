@@ -1,0 +1,3 @@
+applied 04:38:18 KST
+before: 2 Challenge paths: STARTS_WITH /api/queue/enter | STARTS_WITH /api/reservations || order: 0:GeoBlockRule,1:BotControlRule,2:TokenAbsentChallengeRule,3:RateBasedRule,4:HealthCheckExceptionRule | botOverrides: TGT_TokenReuseIp | rate: 1000
+after: 2 Challenge paths: STARTS_WITH /api/queue/enter | STARTS_WITH /api/reservations | ENDS_WITH /seats/lock | STARTS_WITH /api/payments/ || order: 0:GeoBlockRule,1:BotControlRule,2:TokenAbsentChallengeRule,3:RateBasedRule,4:HealthCheckExceptionRule | botOverrides: TGT_TokenReuseIp | rate: 1000

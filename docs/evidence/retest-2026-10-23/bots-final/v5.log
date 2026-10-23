@@ -1,0 +1,31 @@
+[v5] start 04:04:11 KST (19:04:11Z) ip=집 IP(봇용) concurrency=10(default)
+=======================================================
+Bot v5 - 동시 요청 10개 + IP 로테이션
+=======================================================
+  [W008] GET_GAMES CAPTCHA (202) - WAF 차단
+  [W006] GET_GAMES CAPTCHA (202) - WAF 차단
+  [W003] GET_GAMES CAPTCHA (202) - WAF 차단
+  [W005] GET_GAMES CAPTCHA (202) - WAF 차단
+  [W001] GET_GAMES CAPTCHA (202) - WAF 차단
+  [W007] GET_GAMES CAPTCHA (202) - WAF 차단
+  [W009] GET_GAMES CAPTCHA (202) - WAF 차단
+  [W002] GET_GAMES CAPTCHA (202) - WAF 차단
+  [W004] GET_GAMES CAPTCHA (202) - WAF 차단
+  [W000] GET_GAMES CAPTCHA (202) - WAF 차단
+
+=======================================================
+[결과] 동시 요청: 10개 | 소요: 0.09s
+  성공(200): 0  |  차단(429): 0  |  CAPTCHA(202): 10  |  BLOCK(403): 0  |  기타 실패: 0
+  WAF 차단율: 100.0%
+  처리량: 107.6 rps
+
+[WAF 차단 단계별 현황]
+  GET_GAMES: 10개 차단
+
+[IP 로테이션]
+  사용된 IP  : 9개
+  차단된 IP  : 9개
+  우회된 IP  : 0개
+
+[WAF] 차단됨! CAPTCHA: 10개 | BLOCK: 0개
+[v5] end 04:04:13 KST

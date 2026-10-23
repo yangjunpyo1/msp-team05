@@ -1,0 +1,20 @@
+[v4] start 04:43:00 KST (19:43:00Z) ip=집 IP(봇용)
+이메일 입력: 비밀번호 입력: =======================================================
+Bot v4 — 좌석 선점 + 결제 + 예매 완료 전체 흐름
+=======================================================
+[로그인 성공] UA: Mozilla/5.0 (Windows NT 10.0; Win64; x64...
+[경기] LG 트윈스 vs 두산 베어스 | 4362f8b1-1c5a-4fef-8c68-ac450301314c
+[3/6] 좌석 확인 | 중앙석 ơ열 2번 (25,000원)
+Traceback (most recent call last):
+    return complexjson.loads(self.text, **kwargs)
+    return _default_decoder.decode(s)
+json.decoder.JSONDecodeError: Expecting value: line 1 column 1 (char 0)
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+    run()
+    lock_token, amount = lock_seat(token, seat_id, game_id)
+    data = res.json()
+requests.exceptions.JSONDecodeError: Expecting value: line 1 column 1 (char 0)
+[v4] end 04:43:29 KST

@@ -1,0 +1,26 @@
+[v6] start 04:01:02 KST (19:01:02Z) ip=집 IP(봇용)
+이메일 입력: 비밀번호 입력: Traceback (most recent call last):
+  File "C:\Users\양준표\AppData\Local\Programs\Python\Python311\Lib\site-packages\requests\models.py", line 971, in json
+    return complexjson.loads(self.text, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\양준표\AppData\Local\Programs\Python\Python311\Lib\json\__init__.py", line 346, in loads
+    return _default_decoder.decode(s)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\양준표\AppData\Local\Programs\Python\Python311\Lib\json\decoder.py", line 337, in decode
+    obj, end = self.raw_decode(s, idx=_w(s, 0).end())
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\양준표\AppData\Local\Programs\Python\Python311\Lib\json\decoder.py", line 355, in raw_decode
+    raise JSONDecodeError("Expecting value", s, err.value) from None
+json.decoder.JSONDecodeError: Expecting value: line 1 column 1 (char 0)
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\양준표\AppData\Local\Temp\claude\C--Users-----IdeaProjects-msp-team05\e42bf758-5be9-4856-b8c5-89735281b0c7\scratchpad\bots2\bot_v6_websocket.py", line 164, in <module>
+    login()
+  File "C:\Users\양준표\AppData\Local\Temp\claude\C--Users-----IdeaProjects-msp-team05\e42bf758-5be9-4856-b8c5-89735281b0c7\scratchpad\bots2\bot_v6_websocket.py", line 25, in login
+            ^^^^^^^^^^
+  File "C:\Users\양준표\AppData\Local\Programs\Python\Python311\Lib\site-packages\requests\models.py", line 975, in json
+    raise RequestsJSONDecodeError(e.msg, e.doc, e.pos)
+requests.exceptions.JSONDecodeError: Expecting value: line 1 column 1 (char 0)
+[v6] end 04:01:04 KST exit=1

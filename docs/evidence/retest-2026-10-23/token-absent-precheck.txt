@@ -1,0 +1,19 @@
+files=15 records=571 range=23:13:52~03:28:59
+1 browser-UA 집 IP(봇용) POST /api/queue/enter token:absent ALLOW
+2 browser-UA 핫스팟 IP(사람용)-E GET /api/reservations token:accepted ALLOW
+1 browser-UA 핫스팟 IP(사람용)-E POST /api/queue/enter token:accepted ALLOW
+1 browser-UA 핫스팟 IP(사람용)-E POST /api/reservations token:accepted ALLOW
+4 browser-UA 핫스팟 IP(사람용)-A GET /api/reservations token:accepted ALLOW
+1 browser-UA 핫스팟 IP(사람용)-A GET /api/reservations token:accepted BLOCK
+2 browser-UA 핫스팟 IP(사람용)-A POST /api/queue/enter token:accepted ALLOW
+2 browser-UA 핫스팟 IP(사람용)-A POST /api/reservations token:accepted ALLOW
+2 browser-UA 핫스팟 IP(사람용)-B GET /api/reservations token:accepted ALLOW
+4 browser-UA 핫스팟 IP(사람용)-B GET /api/reservations token:accepted BLOCK
+2 browser-UA 핫스팟 IP(사람용)-B POST /api/queue/enter token:accepted ALLOW
+3 browser-UA 핫스팟 IP(사람용)-B POST /api/queue/enter token:accepted BLOCK
+1 browser-UA 핫스팟 IP(사람용)-B POST /api/reservations token:accepted ALLOW
+1 browser-UA 핫스팟 IP(사람용)-D GET /api/reservations token:accepted ALLOW
+3 browser-UA 핫스팟 IP(사람용)-D POST /api/queue/enter token:accepted ALLOW
+1 browser-UA 핫스팟 IP(사람용)-D POST /api/reservations token:accepted ALLOW
+-- token:absent rows
+00:28:14 집 IP(봇용) POST /api/queue/enter ALLOW UA=Mozilla/5.0 (Windows NT 10.0; Win64; x64

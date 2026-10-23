@@ -1,0 +1,18 @@
+[retest2] terminate i-0c59449037d0ef3f4 at 00:11:24 KST (2026-10-23T15:11:24Z)
+shutting-down
+00:11:33 tg=i-0c59449037d0ef3f4:draining i-0aa02c1c17209d051:healthy 
+00:11:45 tg=i-0c59449037d0ef3f4:draining i-0212095f896cff760:initial i-0aa02c1c17209d051:healthy 
+00:11:56 tg=i-0c59449037d0ef3f4:draining i-0212095f896cff760:initial i-0aa02c1c17209d051:healthy 
+00:12:08 tg=i-0c59449037d0ef3f4:draining i-0212095f896cff760:initial i-0aa02c1c17209d051:healthy 
+00:12:20 tg=i-0c59449037d0ef3f4:draining i-0212095f896cff760:initial i-0aa02c1c17209d051:healthy 
+00:12:31 tg=i-0c59449037d0ef3f4:draining i-0212095f896cff760:initial i-0aa02c1c17209d051:healthy 
+00:12:43 tg=i-0c59449037d0ef3f4:draining i-0212095f896cff760:unhealthy i-0aa02c1c17209d051:healthy 
+00:12:55 tg=i-0c59449037d0ef3f4:draining i-0212095f896cff760:unhealthy i-0aa02c1c17209d051:healthy 
+00:13:06 tg=i-0c59449037d0ef3f4:draining i-0212095f896cff760:unhealthy i-0aa02c1c17209d051:healthy 
+00:13:18 tg=i-0c59449037d0ef3f4:draining i-0212095f896cff760:unhealthy i-0aa02c1c17209d051:healthy 
+00:13:30 tg=i-0c59449037d0ef3f4:draining i-0212095f896cff760:unhealthy i-0aa02c1c17209d051:healthy 
+00:13:41 tg=i-0c59449037d0ef3f4:draining i-0212095f896cff760:unhealthy i-0aa02c1c17209d051:healthy 
+00:13:53 tg=i-0c59449037d0ef3f4:draining i-0212095f896cff760:unhealthy i-0aa02c1c17209d051:healthy 
+00:14:04 tg=i-0c59449037d0ef3f4:draining i-0212095f896cff760:unhealthy i-0aa02c1c17209d051:healthy 
+00:14:16 tg=i-0c59449037d0ef3f4:draining i-0212095f896cff760:healthy i-0aa02c1c17209d051:healthy 
+new instance healthy at 00:14:16 KST

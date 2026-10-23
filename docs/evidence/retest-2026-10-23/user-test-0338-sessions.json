@@ -1,0 +1,40 @@
+[
+ {
+  "tok": "9cecff09",
+  "ip": "핫스팟 IP(사람용)-E",
+  "dev": "Windows Chrome",
+  "from": "03:38:11",
+  "to": "03:45:06",
+  "ALLOW": 131,
+  "CAPTCHA": 1,
+  "CHALLENGE": 0,
+  "BLOCK": 0,
+  "vol": "low→medium→high→maximum",
+  "rules": "BotControlRule/TGT_VolumetricSession",
+  "capShown": 1,
+  "capPassed": true,
+  "res": 8,
+  "lock": 8,
+  "blockedApi": 0,
+  "n": 132
+ },
+ {
+  "tok": "82864f86",
+  "ip": "핫스팟 IP(사람용)-F",
+  "dev": "iPhone Safari",
+  "from": "03:45:25",
+  "to": "03:47:48",
+  "ALLOW": 39,
+  "CAPTCHA": 1,
+  "CHALLENGE": 0,
+  "BLOCK": 0,
+  "vol": "low→medium→high",
+  "rules": "BotControlRule/TGT_VolumetricSession",
+  "capShown": 1,
+  "capPassed": true,
+  "res": 2,
+  "lock": 2,
+  "blockedApi": 0,
+  "n": 40
+ }
+]

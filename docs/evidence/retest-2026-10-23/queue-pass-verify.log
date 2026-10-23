@@ -1,0 +1,21 @@
+user=b1281159 game=4362f8b1 zone=794277fd seats=4
+== 1. direct (no queue) — pass key exists? 0
+  POST seats/lock -> 409 {"success":false,"message":"QUEUE_NOT_PASSED"}
+== 2. normal flow
+  queue status=ALLOWED after ~4s, pass TTL=600
+  TTL before lock (5s later)=594
+  lock -> {"success":true,"message":"OK"} TTL after lock=600
+  prepare -> {"success":true,"message":"OK"}
+  confirm -> 200 {"success":true,"message":"OK"}
+  reservation -> 200 {"success":true,"message":"OK"}
+  pass TTL after reservation=-2 (-2 = deleted)
+  reuse: lock again w/o new queue -> 409 {"success":false,"message":"QUEUE_NOT_PASSED"}
+== 3. prepare/reservation guard (lock with pass, then pass removed)
+  queue status=ALLOWED after ~4s, pass TTL=599
+  lock -> {"success":true,"message":"OK"}
+  pass deleted
+  prepare -> 409 {"success":false,"message":"QUEUE_NOT_PASSED"}
+  reservation -> 409 {"success":false,"message":"QUEUE_NOT_PASSED"}
+done
+
+
